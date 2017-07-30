@@ -1,0 +1,5 @@
+language: node_js
+# or would the language be vue_js?
+node_js: node
+deploy:
+  provider: heroku
