@@ -1,0 +1,72 @@
+//screen for logging in outfits
+//needs a lot of it replaced with images not just descriptions but don't know how?
+{
+  "headpiece": "none",
+  "body": "brown dress",
+  "bottom": "none",
+  "shoes": "brown sandals",
+  "accessories": ["bass string bracelet", "disney ring"]
+},
+{
+  "headpiece": "disney hat",
+  "body": "Thousand Below tee",
+  "bottom": "white shorts",
+  "shoes": "combat boots",
+  "accessories": ["bass string bracelet"]
+},
+{
+  "headpiece": "none",
+  "body": "purple long tally mark drop tee",
+  "bottom": "black pleather shorts",
+  "shoes": "combat boots",
+  "accessories": "none"
+},
+{
+  "headpiece": "none",
+  "body": "dark blue basic tank",
+  "bottom": "jean shorts",
+  "shoes": "white flip flops",
+  "accessories": "none"
+},
+{
+  "headpiece": "none",
+  "body": "white basic long sleeve",
+  "bottom": "high waist olive prarchute pants",
+  "shoes": "brown flats",
+  "accessories": ["TopShop rosegold watch", "scrunchie"]
+},
+{
+  "headpiece": "none",
+  "body": "blue palm tree silhouette crop top",
+  "bottom": "high waist dark blue pleated pants",
+  "shoes": "brown flats",
+  "accessories": "none"
+},
+{
+  "headpiece": "none",
+  "body": "Nintendo Mario Party tee",
+  "bottom": "drawsring shorts",
+  "shoes": "none",
+  "accessories": "none"
+},
+{
+  "headpiece": "none",
+  "body": "Nintendo Mario Party tee",
+  "bottom": "drawstring shorts",
+  "shoes": "none",
+  "accessories": "none"
+},
+{
+  "headpiece": "none",
+  "body": "black moisture wicking shirt",
+  "bottom": "black and gray gym shorts",
+  "shoes": "Ghost 6 running shoes",
+  "accessories": ["hairtie"]
+},
+{
+  "headpiece": "none",
+  "body": "purple long fitted dress",
+  "bottom": "none",
+  "shoes": "combat boots",
+  "accessories": ["glasses", "bass string bracelet"]
+}
