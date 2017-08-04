@@ -1,3 +1,4 @@
-exports.DATABASE_URL = process.env.DATABASE_URL || global.DATABASE_URL
-// || 'mongodb://localhost/minimalist-app'; (when it exists)
+exports.DATABASE_URL = process.env.DATABASE_URL ||
+                        global.DATABASE_URL ||
+                        'mongodb://localhost/minimalist-app'
 exports.PORT = process.env.PORT || 8080;

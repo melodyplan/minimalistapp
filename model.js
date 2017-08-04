@@ -3,20 +3,15 @@ const mongoose = require('mongoose')
 const outfitSchema = mongoose.Schema({
   // not sure what this would be-- if it would list photos?
   //wait! just kidding. image = link = string right?? =D
-  headpiece: {type: String, required: false},
-  body: {type: String, required: false},
-  bottom: {type: String, required: false},
-  shoes: {type: String, required: false},
-  accessories: {
-    accessoryOne: String,
-    accessoryTwo: String,
-    accessoryThree: String,
-    accessoryFour: String,
-    accessoryFive: String,
-    required: false
-    //not sure what to do if they have more than five accessories?
-  },
-  publishDate: {type: Date, default: Date.now()}
+  headpiece: String,
+  body: String,
+  bottom: String,
+  shoes: String,
+  accessories: [String],
+  date: {
+    type: Date,
+    default: Date.now()
+  }
 });
 
 outfitSchema.methods.apiRepr = function() {
@@ -27,10 +22,10 @@ outfitSchema.methods.apiRepr = function() {
     bottom: this.bottom,
     shoes: this.shoes,
     accessories: this.accessories,
-    publishDate: this.publishDate
+    date: this.date
   };
 }
 
-const Outfit = mongoose.mode('Outfit', outfitSchema);
+const Outfit = mongoose.model('Outfit', outfitSchema);
 
-modult.exports = {Outfit};
+module.exports = { Outfit };
