@@ -1,5 +1,8 @@
-//screen for logging in outfits
+//screen for outfits
 //needs a lot of it replaced with images not just descriptions but don't know how?
+//i know i need dates too so the filtering would do well to list what days what is
+worn, and it would automatically add those when users log an outfit, but in this
+case would i just put them in manually for testing?
 {
   "headpiece": "none",
   "body": "brown dress",
@@ -61,7 +64,7 @@
   "body": "black moisture wicking shirt",
   "bottom": "black and gray gym shorts",
   "shoes": "Ghost 6 running shoes",
-  "accessories": ["hairtie"]
+  "accessories": ["hair tie"]
 },
 {
   "headpiece": "none",
@@ -69,4 +72,74 @@
   "bottom": "none",
   "shoes": "combat boots",
   "accessories": ["glasses", "bass string bracelet"]
+},
+{
+  "headpiece": "white WestWorld hat",
+  "body": "blue tank",
+  "bottom": "white distressed jeans",
+  "shoes": "combat boots",
+  "accessories": "none"
+},
+{
+  "headpiece": "none",
+  "body": "Moana crop top",
+  "bottom": "Moana skirt",
+  "shoes": "brown sandals",
+  "accessories": ["Moana necklace", "Moana belt"]
+},
+{
+  "headpiece": "none",
+  "body": "Moana crop top",
+  "bottom": "Moana skirt",
+  "shoes": "brown sandals",
+  "accessories": ["Moana necklace", "Moana belt"]
+},
+{
+  "headpiece": "none",
+  "body": "olive sports bra",
+  "bottom": "black and gray gym shorts",
+  "shoes": "none",
+  "accessories": "none"
+},
+{
+  "headpiece": "none",
+  "body": "Final Fantasy shirt",
+  "bottom": "gray sweats",
+  "shoes": "none",
+  "accessories": "none"
+},
+{
+  "headpiece": "none",
+  "body": "Mae band tee",
+  "bottom": "black leggings",
+  "shoes": "combat boots",
+  "accessories": "none"
+},
+{
+  "headpiece": "none",
+  "body": "yellow strapless bikini top",
+  "bottom": "yellow Boutine LA lily bottoms",
+  "shoes": "white flip flops",
+  "accessories": ["sunglasses"]
+},
+{
+  "headpiece": "none",
+  "body": "white Boutine LA yoga bikini top",
+  "bottom": "yellow Boutine LA lily bottoms",
+  "shoes": "white flip flops",
+  "accessories": ["sunglasses"]
+},
+{
+  "headpiece": "none",
+  "body": "fitted Uniqlo auburn top",
+  "bottom": "gray knee-length sweat skirt",
+  "shoes": "brown flats",
+  "accessories": ["TopShop rosegold watch", "TopShop V ring"]
+},
+{
+  "headpiece": "none",
+  "body": "Keep Up With Me Victoria's Secret tank",
+  "bottom": "jean shorts",
+  "shoes": "white flip flops",
+  "accessories": ["sunglasses", "hair tie"]
 }
