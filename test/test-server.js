@@ -1,7 +1,7 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 
-const {app, runServer, closerServer} = require('../server');
+const {app, runServer, closeServer} = require('../server');
 
 const should = chai.should();
 
@@ -13,7 +13,7 @@ describe('Minimalist App', function() {
   });
 
   after(function() {
-    return closerServer();
+    return closeServer();
   });
 
   it('should list outfits on GET', function() {
@@ -23,7 +23,7 @@ describe('Minimalist App', function() {
       res.should.have.status(200);
       res.should.be.json;
 
-  
+
     })
   })
 
