@@ -12,9 +12,9 @@ function addOutfit() {
       bottom: bottom,
       shoes: shoes,
       accessories: accessories
-    };
+    }
     console.log(headpiece, body, bottom, shoes, accessories)
-  });
+  })
 
   $.ajax({
     url: '/outfits',
@@ -23,8 +23,7 @@ function addOutfit() {
     dataType: 'json',
     data: JSON.stringify(outfitData),
     success: function(data) {
-      console.log("post request worked!")
-    };
-  });
-
-};
+      console.log('post request worked!')
+    }
+  })
+}
