@@ -24,6 +24,31 @@ app.get('/outfits', (req, res) => {
     })
 })
 
+app.post('/outfits', (req, res) => {
+  const requiredFields = ['headpiece', 'body', 'bottom', 'shoes', 'accessories']
+  for (let i = 0; i < requiredFields.length; i++) {
+    const field = requiredFields[i]
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\` in request body`
+      console.error(message)
+      return res.status(400).send(message)
+    }
+  }
+
+  Outfit.create({
+    headpiece: req.body.headpiece,
+    body: req.body.body,
+    bottom: req.body.bottom,
+    shoes: req.body.shoes,
+    accessories: req.body.accessories
+  })
+    .then(outfits => res.status(201).json(outfits.apiRepr()))
+    .catch(err => {
+      console.error(err)
+      res.status(500).json({ error: 'Something went wrong' })
+    })
+})
+
 let server
 
 function runServer(databaseUrl = DATABASE_URL, port = PORT) {

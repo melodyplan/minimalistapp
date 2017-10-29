@@ -13,7 +13,7 @@ function addOutfit() {
       shoes: shoes,
       accessories: accessories
     }
-    console.log(headpiece, body, bottom, shoes, accessories)
+    console.log(headpiece, body, bottom, shoes, accessories, date)
   })
 
   $.ajax({
