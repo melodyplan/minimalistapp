@@ -42,7 +42,7 @@ app.post('/outfits', (req, res) => {
     shoes: req.body.shoes,
     accessories: req.body.accessories
   })
-    .then(outfit => res.status(201).json(outfit.apiRepr()))
+    .then(outfits => res.status(201).json(outfits.apiRepr()))
     .catch(err => {
       console.error(err)
       res.status(500).json({ error: 'Something went wrong' })

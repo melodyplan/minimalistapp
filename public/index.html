@@ -6,7 +6,7 @@
     <title>For fun</title>
     <meta name="description" content="An app designed to sort, graph and ultimately declutter your wardrobe">
     <meta name="viewport" content="width=device-width, intial-scale=1">
-    <!-- <link rel="stylesheet" href="index.css"> -->
+    <link rel="stylesheet" href="index.css">
   </head>
   <body>
     <nav>
@@ -17,39 +17,52 @@
         <a href="/logout"<li>Logout</li></a>
       </ul>
     </nav>
-    <!-- <div id="progress"></div>
 
-    <div class="center">
-      <div id="register">
-
-        <i id="progressButton" class="ion-android-arrow-forward next"></i>
-
-        <div id="inputContainer">
-          <input id="inputField" required autofocus />
-          <label id="inputLabel"></label>
-          <div id="inputProgress"></div>
-        </div>
-
-      </div>
-    </div> -->
     <div>
-      <form class="example-form">
-        <label>Headpiece</label>
-    <input class="headpiece-input" type="text">
-        <label>Body</label>
-    <input class="body-input" type="text">
-          <label>Bottom</label>
-    <input class="bottom-input" type="text">
-          <label>Shoes</label>
-    <input class="shoes-input" type="text">
-          <label>Accesorries</label>
-    <input class="accessories-input" type="text">
-    <button class="submit">Click Me!</button>
-  </form>
+      <section class="row text-center">
+        <form class="question-form text-left">
+          <h3>What are you wearing?</h3>
+          <div class="headpiece">
+            <label>
+              Head: <input class="headpiece-input" value="Headpiece" type="text">
+            </label>
+          </div>
+          <div class="body">
+            <label>
+              Body: <input class="body-input" type="text">
+            </label>
+          </div>
+          <div class="bottom">
+            <label>
+              Bottom: <input class="bottom-input" type="text">
+            </label>
+          </div>
+          <div class="shoes">
+            <label>
+              Shoes: <input class="shoes-input" type="text">
+            </label>
+          </div>
+          <div class="accessories">
+            <label>
+              Accessories: <input class="accessories-input" type="text">
+            </label>
+          </div>
+          <div class="category">
+            <label>
+             <input value="Emotional" type="radio"> Emotional
+           </label>
+            <label>
+             <input value="Beautiful" type="radio"> Beautiful
+           </label>
+            <label>
+             <input value="Useful" type="radio"> Useful
+           </label>
+          </div>
+          <br><button type="submit" class="btn btn-success pull-right submit-button">Submit</button>
+        </form>
+      </section>
     </div>
-  </body>
-</html>
+</body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="index.js"></script>
-<script
