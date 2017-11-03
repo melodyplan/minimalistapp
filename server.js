@@ -16,7 +16,7 @@ app.get('/outfits', (req, res) => {
   Outfit.find()
     .then(outfits => {
       console.log('outfits found')
-      res.json(outfits)
+      res.json(outfits.map(outfit => outfit.apiRepr()))
     })
     .catch(err => {
       console.error(err)
@@ -25,15 +25,15 @@ app.get('/outfits', (req, res) => {
 })
 
 app.post('/outfits', (req, res) => {
-  const requiredFields = ['headpiece', 'body', 'bottom', 'shoes', 'accessories']
-  for (let i = 0; i < requiredFields.length; i++) {
-    const field = requiredFields[i]
-    if (!(field in req.body)) {
-      const message = `Missing \`${field}\` in request body`
-      console.error(message)
-      return res.status(400).send(message)
-    }
-  }
+  // const requiredFields = ['headpiece', 'body', 'bottom', 'shoes', 'accessories']
+  // for (let i = 0; i < requiredFields.length; i++) {
+  //   const field = requiredFields[i]
+  //   if (!(field in req.body)) {
+  //     const message = `Missing \`${field}\` in request body`
+  //     console.error(message)
+  //     return res.status(400).send(message)
+  //   }
+  // }
 
   Outfit.create({
     headpiece: req.body.headpiece,
