@@ -26,16 +26,14 @@ function seedOutfitData(){
   const seedData = [];
   for (let i=1; i<=10; i++) {
     seedData.push({
-      seedData.push({
-        headpiece: faker.random.words(),
-        body: faker.random.words(),
-        bottom: faker.random.words(),
-        shoes: faker.random.words(),
-        accessories: faker.random.words()
-        //do the rest based on the keys in postman
-        //will eventually be image.fashion()?
-        //accessories might still need help for multiple accessories? push()?
-      })
+      headpiece: faker.random.words(),
+      body: faker.random.words(),
+      bottom: faker.random.words(),
+      shoes: faker.random.words(),
+      accessories: faker.random.words()
+      //do the rest based on the keys in postman
+      //will eventually be image.fashion()?
+      //accessories might still need help for multiple accessories? push()?
     })
   }
   return Outfit.insertMany(seedData);
