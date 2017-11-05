@@ -85,11 +85,11 @@ describe('Minimalist App', function() {
 
           res.should.have.status(200);
           res.should.be.json;
-          res.body.should.be.a.('array');
+          res.body.should.be.a('array');
           res.body.should.have.length.of.at.least(1);
 
           res.body.forEach(function(outfit) {
-            outfit.should.be.a.('object');
+            outfit.should.be.a('object');
             outfit.should.include.keys('id', 'headpiece', 'body', 'bottom', 'shoes', 'accessories', 'date');
           });
           resOutfit = res.body[0]
