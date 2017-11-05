@@ -5,8 +5,8 @@ const mongoose = require('mongoose')
 
 const { app, runServer, closeServer } = require('../server')
 const { Outfit } = require('../model')
-const { DATABASE_URL } = require('..config')
-const { TEST_DATABASE_URL } = require('..config')
+const { DATABASE_URL } = require('../config')
+const { TEST_DATABASE_URL } = require('../config')
 
 const should = chai.should()
 
