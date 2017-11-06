@@ -1,5 +1,5 @@
-function addOutfit(outfitData) {
-  $('.submit').click(function(event) {
+function addOutfit() {
+  $('.question-form').submit(function(event) {
     event.preventDefault()
     let headpiece = $('.headpiece-input').val()
     let body = $('.body-input').val()
@@ -14,7 +14,7 @@ function addOutfit(outfitData) {
       shoes: shoes,
       accessories: accessories
     }
-    console.log(headpiece, body, bottom, shoes, accessories, date)
+    console.log(headpiece, body, bottom, shoes, accessories)
   })
 
   $.ajax({
@@ -22,10 +22,10 @@ function addOutfit(outfitData) {
     url: '/outfits',
     contentType: 'application/json',
     dataType: 'json',
-    data: JSON.stringify(outfitData),
+    data: JSON.stringify(),
     success: function(data) {
       console.log('post request worked!')
-      addOutfit()
+      // addOutfit()
     }
   })
 }
