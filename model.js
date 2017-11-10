@@ -8,6 +8,7 @@ const outfitSchema = mongoose.Schema({
   bottom: String,
   shoes: String,
   accessories: String,
+  occasion: String,
   date: {
     type: Date,
     default: Date.now()
@@ -22,6 +23,7 @@ outfitSchema.methods.apiRepr = function() {
     bottom: this.bottom,
     shoes: this.shoes,
     accessories: this.accessories,
+    occasion: this.occasion,
     date: this.date
   }
 }

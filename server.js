@@ -25,9 +25,9 @@ app.get('/outfits', (req, res) => {
 })
 
 app.get('/outfits/:id', (req, res, next) => {
-  console.log('Request Id:', req.params.id);
+  console.log('Request Id:', req.params.id)
   //i am not sure what logic is also needed here
-}
+})
 
 app.post('/outfits', (req, res) => {
   /*const requiredFields = ['headpiece', 'body', 'bottom', 'shoes', 'accessories']
@@ -45,7 +45,8 @@ app.post('/outfits', (req, res) => {
     body: req.body.body,
     bottom: req.body.bottom,
     shoes: req.body.shoes,
-    accessories: req.body.accessories
+    accessories: req.body.accessories,
+    occasion: req.body.occasion
   })
     .then(outfits => res.status(201).json(outfits.apiRepr()))
     .catch(err => {

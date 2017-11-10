@@ -24,31 +24,30 @@
           <h3>What are you wearing?</h3>
           <div class="headpiece">
             <label>
-              Head: <input class="headpiece-input" value="Headpiece" type="text">
+              Head: <input class="js-headpiece-input" value="Headpiece" type="text">
             </label>
           </div>
           <div class="body">
             <label>
-              Body: <input class="body-input" type="text">
+              Body: <input class="js-body-input" type="text">
             </label>
           </div>
           <div class="bottom">
             <label>
-              Bottom: <input class="bottom-input" type="text">
+              Bottom: <input class="js-bottom-input" type="text">
             </label>
           </div>
           <div class="shoes">
             <label>
-              Shoes: <input class="shoes-input" type="text">
+              Shoes: <input class="js-shoes-input" type="text">
             </label>
           </div>
-
           <!-- add multiple strings for accessories (such as an extra button;
           see shopping list)-->
 
           <div class="accessories">
             <label>
-              Accessories: <input class="accessories-input" type="text">
+              Accessories: <input class="js-accessories-input" type="text">
             </label>
           </div>
           <!-- <div class="category">
@@ -62,9 +61,20 @@
               <input value="Useful" type="radio"> Useful
             </label>
           </div> -->
+
+          <div class="occasion">
+            <label>Occasion:</label> <select class="js-occasion-input"> <!--Supplement an id here instead of using 'name'-->
+              <option value="value1">Value 1</option>
+              <option value="value2" selected>Value 2</option>
+              <option value="value3">Value 3</option>
+            </select>
+          </div>
           <br><button type="submit" class="btn btn-info pull-right submit-button">Submit</button>
         </form>
       </section>
+    </div>
+
+    <div class="display-outfits">
     </div>
 </body>
 
