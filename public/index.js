@@ -15,18 +15,18 @@ function addOutfit() {
       accessories: accessories
     }
     console.log(headpiece, body, bottom, shoes, accessories)
-  })
-
-  $.ajax({
-    method: 'POST',
-    url: '/outfits',
-    contentType: 'application/json',
-    dataType: 'json',
-    data: JSON.stringify(),
-    success: function(data) {
-      console.log('post request worked!')
-      // addOutfit()
-    }
+    $.ajax({
+      method: 'POST',
+      url: '/outfits',
+      contentType: 'application/json',
+      dataType: 'json',
+      data: JSON.stringify(outfitData),
+      success: function(data) {
+        console.log('post request worked!')
+        // addOutfit()
+        // reference shopping list app getAndDisplayOutfits()
+      }
+    })
   })
 }
 

@@ -24,16 +24,21 @@ app.get('/outfits', (req, res) => {
     })
 })
 
+app.get('/outfits/:id', (req, res, next) => {
+  console.log('Request Id:', req.params.id);
+  //i am not sure what logic is also needed here
+}
+
 app.post('/outfits', (req, res) => {
-  // const requiredFields = ['headpiece', 'body', 'bottom', 'shoes', 'accessories']
-  // for (let i = 0; i < requiredFields.length; i++) {
-  //   const field = requiredFields[i]
-  //   if (!(field in req.body)) {
-  //     const message = `Missing \`${field}\` in request body`
-  //     console.error(message)
-  //     return res.status(400).send(message)
-  //   }
-  // }
+  /*const requiredFields = ['headpiece', 'body', 'bottom', 'shoes', 'accessories']
+  for (let i = 0; i < requiredFields.length; i++) {
+    const field = requiredFields[i]
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\` in request body`
+      console.error(message)
+      return res.status(400).send(message)
+    }
+  }*/
 
   Outfit.create({
     headpiece: req.body.headpiece,

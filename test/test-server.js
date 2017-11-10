@@ -22,7 +22,7 @@ function tearDownDb() {
   })
 }
 
-function seedOutfitData() {
+/*function seedOutfitData() {
   console.log('seeding outfit data')
   const seedData = []
   for (let i = 1; i <= 10; i++) {
@@ -38,7 +38,7 @@ function seedOutfitData() {
     })
   }
   return Outfit.insertMany(seedData)
-}
+}*/
 
 describe('Minimalist App', function() {
   before(function() {
