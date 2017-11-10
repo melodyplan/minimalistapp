@@ -34,6 +34,20 @@ $(function() {
   addOutfit()
 })
 
+function fetchOutfit() {
+  $.ajax({
+    method: 'GET',
+    url: '/outfits',
+    dataType: 'json',
+    success: function(res) {
+      console.log('display/render outfits')
+      /*i was trying to reference my APOD app that used axios, but i don't
+      think it'll work because it's already grabbing from an existing server
+      and mine doesn't really exist yet...*/
+    }
+  })
+}
+
 // function deleteOutfit(outfitId) {
 //   console.log('delete outfit worked');
 //   $.ajax({
