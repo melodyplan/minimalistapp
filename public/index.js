@@ -31,54 +31,157 @@ function addOutfit() {
   })
 }
 
-$(function() {
-  addOutfit()
-})
-
 function fetchOutfit() {
   $.ajax({
     method: 'GET',
     url: '/outfits',
     dataType: 'json',
     success: function(res) {
-      console.log('display/render outfits');
+      console.log('display/render outfits')
       displayFetchOutfit()
-    });
+    }
   })
 }
 
 //work on lines 51-74 on getting outfits to dislay on landing page
-const outfitTemplate = (
+const outfitTemplate =
   '<div class="outfit js-outfit">' +
-  '<h3 class="js-outfit-name"><h3>' +
+  '<h3 class="js-outfit-date"><h3>' +
   '<hr>' +
-  '<ul class="js-outfit-accessories">' +
-  //keep modifying from shopping list template
+  '<ul class="js-outfit-headpiece">' +
   '</ul>' +
-  '<div class="recipe-controls">' +
-    '<button class="js-recipe-delete">' +
-      '<span class="button-label">delete</span>' +
-    '</button>' +
+  '<ul class="js-outfit-body">' +
+  '</ul>' +
+  '<ul class="js-outfit-bottom">' +
+  '</ul>' +
+  '<ul class="js-outfit-shoes">' +
+  '</ul>' +
+  '<ul class="js-outfit-accessories">' +
+  '</ul>' +
+  //should probably add the drop down list here?
+  '<div class="outfit-controls">' +
+  '<button class="js-outfit-delete">' +
+  '<span class="button-label">Delete</span>' +
+  '</button>' +
   '</div>' +
-'</div>'
-);
+  '</div>'
+
+var serverBase = '//localhost:8080/'
+var OUTFITS_URL = serverBase + 'outfits'
 
 function displayFetchOutfit() {
   var outfitsElement = outfits.map(function(outfit) {
-    element.attr('id', outfit.id);
-    element.attr('date', outfit.date);
-  });
-
-  $('.display-outfits').html(/*?*/)
-  return element;
+    var element = $(outfitTemplate)
+    element.attr('id', outfit.id)
+    // element.attr('date', outfit.date);
+    element.find('.js-outfit-date').text(outfit.date)
+    outfit.headpiece.forEach(function(headpiece) {
+      element.find('js-outfit-headpiece').append('<li>' + headpiece + '</li>')
+    })
+    outfit.body.forEach(function(body) {
+      element.find('js-outfit-body').append('<li>' + body + '</li>')
+    })
+    outfit.headpiece.forEach(function(bottom) {
+      element.find('js-outfit-bottom').append('<li>' + bottom + '</li>')
+    })
+    outfit.shoes.forEach(function(shoes) {
+      element.find('js-outfit-shoes').append('<li>' + shoes + '</li>')
+    })
+    outfit.accessories.forEach(function(accessories) {
+      element
+        .find('js-outfit-accessories')
+        .append('<li>' + accessories + '</li>')
+    })
+    return element
+  })
+  $('.display-outfits').html(outfitsElement)
 }
 
+function handleDisplayOutfit() {
+  $('.display-outfits-form').submit(function(e) {
+    e.preventDefault()
+    var headpiece = $(e.currentTarget)
+      .find('#js-headpiece')
+      .val()
+      .split(',')
+      .map(function(headpiece) {
+        return headpiece.trim()
+      })
+    var body = $(e.currentTarget)
+      .find('#js-body')
+      .val()
+      .split(',')
+      .map(function(body) {
+        return body.trim()
+      })
+    var bottom = $(e.currentTarget)
+      .find('#js-bottom')
+      .val()
+      .split(',')
+      .map(function(bottom) {
+        return bottom.trim()
+      })
+    var shoes = $(e.currentTarget)
+      .find('#js-shoes')
+      .val()
+      .split(',')
+      .map(function(shoes) {
+        return shoes.trim()
+      })
+    var accessories = $(e.currentTarget)
+      .find('#js-accessories')
+      .val()
+      .split(',')
+      .map(function(accessories) {
+        return accessories.trim()
+      })
+    addOutfit({
+      date: $(e.currentTarget).find('#js-date').val(),
+      headpiece: headpiece,
+      body: body,
+      bottom: bottom,
+      shoes: shoes,
+      accessories: accessories
+    })
+  })
+}
 
-// function deleteOutfit(outfitId) {
-//   console.log('delete outfit worked');
-//   $.ajax({
-//     url: '/outfits' + '/' + outfitId,
-//     method: 'DELETE',
-//     success:
-//   })
-// }
+function handleRecipeAdd() {
+  $('#js-recipe-form').submit(function(e) {
+    e.preventDefault()
+    var ingredients = $(e.currentTarget)
+      .find('#ingredients-list')
+      .val()
+      .split(',')
+      .map(function(ingredient) {
+        return ingredient.trim()
+      })
+    addRecipe({
+      name: $(e.currentTarget).find('#recipe-name').val(),
+      ingredients: ingredients
+    })
+  })
+
+  function deleteOutfit(outfitId) {
+    console.log('Deleting outfit `' + outfitId + '`')
+    $.ajax({
+      url: OUTFITS_URL + '/' + outfitId,
+      method: 'DELETE',
+      success: displayFetchOutfit
+    })
+  }
+
+  /*function deleteRecipe(recipeId) {
+  console.log('Deleting recipe `' + recipeId + '`');
+  $.ajax({
+    url: RECIPES_URL + '/' + recipeId,
+    method: 'DELETE',
+    success: getAndDisplayRecipes
+  });
+}*/
+
+  $(function() {
+    addOutfit()
+    fetchOutfit()
+  })
+}
