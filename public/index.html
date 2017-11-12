@@ -10,12 +10,9 @@
   </head>
   <body>
     <nav>
-      <ul>
-        <a href="/dashboard"><li>Dashboard/Home</li></a>
-        <a href="/new-outfit"><li>New Outfit</li></a>
-        <a href="/stats"><li>Stats</li></a>
-        <a href="/logout"<li>Logout</li></a>
-      </ul>
+      <form class="show-question-form">
+        <button type="submit">Click me to toggle</button>
+      </form>
     </nav>
 
     <div>
@@ -74,44 +71,8 @@
       </section>
     </div>
     <p>
-    <div>
-      <section class="row text-center">
-        <form class="display-outfits-form">
-          <div class="js-date">
-            <label for="js-date">Date</label>
-            <input type="text" name="js-date" id="js-date" placeholder="e.g., yyyy-mm-dd">
-          </div>
-          <div class="js-headpiece">
-            <label for="js-headpiece">Headpiece</label>
-            <input type="text" name="js-headpiece" id="js-headpiece", placeholder="brown hat">
-          </div>
-          <div class="js-body">
-            <label for="js-body">Body</label>
-            <input type="text" name="js-body" id="js-body", placeholder="white t-shirt">
-          </div>
-          <div class="js-bottom">
-            <label for="js-bottom">Bottom</label>
-            <input type="text" name="js-bottom" id="js-bottom", placeholder="black pants">
-          </div>
-          <div class="js-shoes">
-            <label for="js-shoes">Shoes</label>
-            <input type="text" name="js-shoes" id="js-shoes", placeholder="white sneakers">
-          </div>
-          <div class="accessories">
-            <label for="js-accessories">Accessories</label>
-            <input type="text" name="js-accessories" id="js-accessories", placeholder="bracelet, ring">
-          </div>
-<!--
-          <div class="occasion">
-            <label>Occasion:</label> <select class="js-occasion-input">
-              <option value="value1">Value 1</option>
-              <option value="value2" selected>Value 2</option>
-              <option value="value3">Value 3</option>
-            </select>
-          </div> -->
-          <button type="submit">Display outfit</button>
-        </form>
-      </section>
+    <div class="display">
+      <button type="submit">Display outfit</button>
     </div>
 </body>
 

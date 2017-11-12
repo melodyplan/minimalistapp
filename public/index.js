@@ -38,7 +38,7 @@ function fetchOutfit() {
     dataType: 'json',
     success: function(res) {
       console.log('display/render outfits')
-      displayFetchOutfit()
+      setupDisplayOutfit()
     }
   })
 }
@@ -60,6 +60,7 @@ const outfitTemplate =
   '</ul>' +
   //should probably add the drop down list here?
   '<div class="outfit-controls">' +
+  //on click only delete button is working. need to be able to throw in the get request
   '<button class="js-outfit-delete">' +
   '<span class="button-label">Delete</span>' +
   '</button>' +
@@ -69,7 +70,7 @@ const outfitTemplate =
 var serverBase = '//localhost:8080/'
 var OUTFITS_URL = serverBase + 'outfits'
 
-function displayFetchOutfit() {
+/*function displayFetchOutfit() {
   var outfitsElement = outfits.map(function(outfit) {
     var element = $(outfitTemplate)
     element.attr('id', outfit.id)
@@ -94,13 +95,16 @@ function displayFetchOutfit() {
     })
     return element
   })
-  $('.display-outfits').html(outfitsElement)
-}
+  $('.display-outfits-form').html(outfitsElement)
+}*/
 
-function handleDisplayOutfit() {
-  $('.display-outfits-form').submit(function(e) {
-    e.preventDefault()
-    var headpiece = $(e.currentTarget)
+function setupDisplayOutfit() {
+  $('.display').on('click', function(event) {
+    console.log('display outfit button clicked')
+    event.preventDefault()
+    let element = outfitTemplate
+    $('.display').html(element)
+    /*var headpiece = $(e.currentTarget)
       .find('#js-headpiece')
       .val()
       .split(',')
@@ -142,36 +146,20 @@ function handleDisplayOutfit() {
       bottom: bottom,
       shoes: shoes,
       accessories: accessories
-    })
+    })*/
   })
 }
 
-function handleRecipeAdd() {
-  $('#js-recipe-form').submit(function(e) {
-    e.preventDefault()
-    var ingredients = $(e.currentTarget)
-      .find('#ingredients-list')
-      .val()
-      .split(',')
-      .map(function(ingredient) {
-        return ingredient.trim()
-      })
-    addRecipe({
-      name: $(e.currentTarget).find('#recipe-name').val(),
-      ingredients: ingredients
-    })
+function deleteOutfit(outfitId) {
+  console.log('Deleting outfit `' + outfitId + '`')
+  $.ajax({
+    url: OUTFITS_URL + '/' + outfitId,
+    method: 'DELETE',
+    success: setupFetchOutfit
   })
+}
 
-  function deleteOutfit(outfitId) {
-    console.log('Deleting outfit `' + outfitId + '`')
-    $.ajax({
-      url: OUTFITS_URL + '/' + outfitId,
-      method: 'DELETE',
-      success: displayFetchOutfit
-    })
-  }
-
-  /*function deleteRecipe(recipeId) {
+/*function deleteRecipe(recipeId) {
   console.log('Deleting recipe `' + recipeId + '`');
   $.ajax({
     url: RECIPES_URL + '/' + recipeId,
@@ -180,8 +168,18 @@ function handleRecipeAdd() {
   });
 }*/
 
-  $(function() {
-    addOutfit()
-    fetchOutfit()
+function clickHandler() {
+  var form = $('.show-question-form')
+
+  form.submit(function(event) {
+    event.preventDefault()
+
+    $('.question-form').toggle()
   })
 }
+
+$(function() {
+  addOutfit()
+  fetchOutfit()
+  clickHandler()
+})
