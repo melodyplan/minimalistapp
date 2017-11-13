@@ -5,13 +5,18 @@
     <title>Minimize Wardrobe</title>
     <meta name="description" content="An app designed to sort, graph and ultimately declutter your wardrobe">
     <meta name="viewport" content="width=device-width, intial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body>
     <nav>
       <form class="show-question-form">
-        <button type="submit">Click me to toggle</button>
+        <button type="submit" class="add-outfit-button">Add outfit</button>
+        <button type="button" class="display-outfits-button">Display outfits</button>
+        <button type="button" class="display-stats">Stats</button>
       </form>
     </nav>
 
@@ -21,7 +26,7 @@
           <h3>What are you wearing?</h3>
           <div class="headpiece">
             <label>
-              Head: <input class="js-headpiece-input" value="Headpiece" type="text">
+              Head: <input class="js-headpiece-input" placeholder="" type="text">
             </label>
           </div>
           <div class="body">
@@ -61,24 +66,37 @@
 
           <div class="occasion">
             <label>Occasion:</label> <select class="js-occasion-input"> <!--Supplement an id here instead of using 'name'-->
-              <option value="value1">Value 1</option>
-              <option value="value2" selected>Value 2</option>
-              <option value="value3">Value 3</option>
+              <option value="value1">Black Tie</option>
+              <option value="value2">Cocktail</option>
+              <option value="value3" selected>Everyday</option>
+              <option value="value4">Family Get Together</option>
+              <option value="value5">Holiday</option>
+              <option value="value6">Lunch</option>
+              <option value="value7">Night Out</option>
+              <option value="value8">Weekend</option>
+              <option value="value9">Work</option>
+              <option value="value10">Wedding</option>
+              <option value="value11">Vacation</option>
+              <option value="value12">Other</option>
             </select>
           </div>
           <br><button type="submit" class="btn btn-info pull-right submit-button">Submit</button>
         </form>
       </section>
     </div>
-    <p>
-    <div class="display">
-      <button type="submit">Display outfit</button>
+
+    <section>
+      <div class="display hidden">
+        <button type="submit">Display outfit</button>
+      </div>
+    </section>
+
+  <section>
+    <div class="display-chart hidden">
+      <canvas id="pie-chart" width="800" height="450"</canvas>
+      <canvas id="bar-chart" width="800" height="450"</canvas>
     </div>
+  </section>
 </body>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="index.js"></script>
-
-
 
 </html>

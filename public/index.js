@@ -1,13 +1,13 @@
 function addOutfit() {
   $('.question-form').submit(function(event) {
-    event.preventDefault()
-    let headpiece = $('.js-headpiece-input').val()
-    let body = $('.js-body-input').val()
-    let bottom = $('.js-bottom-input').val()
-    let shoes = $('.js-shoes-input').val()
-    let accessories = []
-    accessories.push($('.js-accessories-input').val())
-    let occasion = $('.js-occasion-input').val()
+    event.preventDefault();
+    let headpiece = $('.js-headpiece-input').val();
+    let body = $('.js-body-input').val();
+    let bottom = $('.js-bottom-input').val();
+    let shoes = $('.js-shoes-input').val();
+    let accessories = [];
+    accessories.push($('.js-accessories-input').val());
+    let occasion = $('.js-occasion-input').val();
     const outfitData = {
       headpiece: headpiece,
       body: body,
@@ -15,8 +15,8 @@ function addOutfit() {
       shoes: shoes,
       accessories: accessories,
       occasion: occasion
-    }
-    console.log(headpiece, body, bottom, shoes, accessories, occasion)
+    };
+    console.log(headpiece, body, bottom, shoes, accessories, occasion);
     $.ajax({
       method: 'POST',
       url: '/outfits',
@@ -24,11 +24,11 @@ function addOutfit() {
       dataType: 'json',
       data: JSON.stringify(outfitData),
       success: function(data) {
-        console.log('post request worked!')
+        console.log('post request worked!');
         // reference shopping list app getAndDisplayOutfits()
       }
-    })
-  })
+    });
+  });
 }
 
 function fetchOutfit() {
@@ -37,10 +37,10 @@ function fetchOutfit() {
     url: '/outfits',
     dataType: 'json',
     success: function(res) {
-      console.log('display/render outfits')
-      setupDisplayOutfit()
+      console.log('display/render outfits');
+      setupDisplayOutfit();
     }
-  })
+  });
 }
 
 //work on lines 51-74 on getting outfits to dislay on landing page
@@ -65,10 +65,10 @@ const outfitTemplate =
   '<span class="button-label">Delete</span>' +
   '</button>' +
   '</div>' +
-  '</div>'
+  '</div>';
 
-var serverBase = '//localhost:8080/'
-var OUTFITS_URL = serverBase + 'outfits'
+var serverBase = '//localhost:8080/';
+var OUTFITS_URL = serverBase + 'outfits';
 
 /*function displayFetchOutfit() {
   var outfitsElement = outfits.map(function(outfit) {
@@ -100,10 +100,10 @@ var OUTFITS_URL = serverBase + 'outfits'
 
 function setupDisplayOutfit() {
   $('.display').on('click', function(event) {
-    console.log('display outfit button clicked')
-    event.preventDefault()
-    let element = outfitTemplate
-    $('.display').html(element)
+    console.log('display outfit button clicked');
+    event.preventDefault();
+    let element = outfitTemplate;
+    $('.display').html(element);
     /*var headpiece = $(e.currentTarget)
       .find('#js-headpiece')
       .val()
@@ -147,16 +147,16 @@ function setupDisplayOutfit() {
       shoes: shoes,
       accessories: accessories
     })*/
-  })
+  });
 }
 
 function deleteOutfit(outfitId) {
-  console.log('Deleting outfit `' + outfitId + '`')
+  console.log('Deleting outfit `' + outfitId + '`');
   $.ajax({
     url: OUTFITS_URL + '/' + outfitId,
     method: 'DELETE',
     success: setupFetchOutfit
-  })
+  });
 }
 
 /*function deleteRecipe(recipeId) {
@@ -168,18 +168,104 @@ function deleteOutfit(outfitId) {
   });
 }*/
 
+function setupPieChart() {
+  new Chart(document.getElementById('pie-chart'), {
+    type: 'pie',
+    data: {
+      labels: ['Headpiece', 'Body', 'Bottom', 'Shoes', 'Accessories'],
+      datasets: [
+        {
+          label: 'How often worn (percent)',
+          backgroundColor: [
+            '#3e95cd',
+            '#8e5ea2',
+            '#3cba9f',
+            '#e8c3b9',
+            '#c45850'
+          ],
+          data: [8, 30, 30, 30, 15]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'How often outfit articles were worn this month'
+      }
+    }
+  });
+}
+
+/*function setupBarChart() {
+  new Chart(document.getElementById('bar-chart'), {
+    type: 'bar',
+    data: {
+      labels: [
+        'Black Tie',
+        'Cocktail',
+        'Everyday',
+        'Family Get Together',
+        'Holiday',
+        'Night Out',
+        'Weekend',
+        'Work',
+        'Wedding'
+      ],
+      datasets: [
+        {
+          label: 'Outfits by occasion',
+          backgroundColor: [
+            '#3e95cd',
+            '#8e5ea2',
+            '#3cba9f',
+            '#e8c3b9',
+            '#c45850'
+          ],
+          data: [4, 0, 135, 2, 30, 9, 15, 1]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Outfits worn by occasion this year'
+      }
+    }
+  });
+}*/
+
 function clickHandler() {
-  var form = $('.show-question-form')
+  let form = $('.show-question-form');
 
   form.submit(function(event) {
-    event.preventDefault()
+    event.preventDefault();
 
-    $('.question-form').toggle()
-  })
+    $('.question-form').toggle();
+    $('.display').hide();
+    $('.display-chart').hide();
+  });
+
+  $('.display-outfits-button').on('click', function(event) {
+    event.preventDefault();
+
+    $('.display').removeClass('hidden').toggle();
+    $('.question-form').hide();
+    $('.display-chart').hide();
+  });
+
+  $('.display-stats').on('click', function(event) {
+    event.preventDefault();
+
+    $('.display-chart').removeClass('hidden').toggle();
+    $('.question-form').hide();
+    $('.display').hide();
+  });
 }
 
 $(function() {
-  addOutfit()
-  fetchOutfit()
-  clickHandler()
-})
+  addOutfit();
+  fetchOutfit();
+  setupPieChart();
+  // setupBarChart();
+  clickHandler();
+});
