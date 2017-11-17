@@ -38,7 +38,6 @@ function fetchOutfit() {
     dataType: 'json',
     success: function(res) {
       console.log('display/render outfits');
-      setupDisplayOutfit();
     }
   });
 }
@@ -68,41 +67,57 @@ const outfitTemplate =
   '</div>';
 
 var serverBase = '//localhost:8080/';
-var OUTFITS_URL = serverBase + 'outfits';
+var OUTFITS_URL = '/outfits';
+var outfits = [];
 
-/*function displayFetchOutfit() {
-  var outfitsElement = outfits.map(function(outfit) {
-    var element = $(outfitTemplate)
-    element.attr('id', outfit.id)
+function displayFetchOutfit() {
+  console.log('test');
+  $.getJSON(OUTFITS_URL, function(outfits) {
+    let outfitsElement = outfits.map(function(outfits) {
+      let element = $(outfitTemplate);
+      element.attr('id', outfits._id);
+      let outfitName = element.find('.js-outfit');
+      outfitName.text(outfits.headpiece);
+      return element;
+    });
+    $('.display').html(outfitsElement);
+  });
+  /*var outfitsElement = outfits.map(function(outfit) {
+    var element = $(outfitTemplate);
+    console.log(element);
+    element.attr('id', `${data.id}`);
     // element.attr('date', outfit.date);
-    element.find('.js-outfit-date').text(outfit.date)
+    element.find('.js-outfit-date').text(outfit.date);
     outfit.headpiece.forEach(function(headpiece) {
-      element.find('js-outfit-headpiece').append('<li>' + headpiece + '</li>')
-    })
+      element.find('js-outfit-headpiece').append('<li>' + headpiece + '</li>');
+    });
     outfit.body.forEach(function(body) {
-      element.find('js-outfit-body').append('<li>' + body + '</li>')
-    })
+      element.find('js-outfit-body').append('<li>' + body + '</li>');
+    });
     outfit.headpiece.forEach(function(bottom) {
-      element.find('js-outfit-bottom').append('<li>' + bottom + '</li>')
-    })
+      element.find('js-outfit-bottom').append('<li>' + bottom + '</li>');
+    });
     outfit.shoes.forEach(function(shoes) {
-      element.find('js-outfit-shoes').append('<li>' + shoes + '</li>')
-    })
+      element.find('js-outfit-shoes').append('<li>' + shoes + '</li>');
+    });
     outfit.accessories.forEach(function(accessories) {
       element
         .find('js-outfit-accessories')
-        .append('<li>' + accessories + '</li>')
-    })
-    return element
-  })
-  $('.display-outfits-form').html(outfitsElement)
-}*/
+        .append('<li>' + accessories + '</li>');
+    });
+    return element;
+  });
+  $('.display').html(outfitsElement);*/
+}
 
 function setupDisplayOutfit() {
-  $('.display').on('click', function(event) {
+  $('.show-display-outfit').submit(function(event) {
     console.log('display outfit button clicked');
     event.preventDefault();
-    let element = outfitTemplate;
+    fetchOutfit();
+  });
+}
+/*    let element = $(outfitTemplate);
     $('.display').html(element);
     /*var headpiece = $(e.currentTarget)
       .find('#js-headpiece')
@@ -146,9 +161,9 @@ function setupDisplayOutfit() {
       bottom: bottom,
       shoes: shoes,
       accessories: accessories
-    })*/
+    })
   });
-}
+}*/
 
 function deleteOutfit(outfitId) {
   console.log('Deleting outfit `' + outfitId + '`');
@@ -240,7 +255,7 @@ function clickHandler() {
   form.submit(function(event) {
     event.preventDefault();
 
-    $('.question-form').toggle();
+    $('.question-form').removeClass('hidden').toggle();
     $('.display').hide();
     $('.display-chart').hide();
   });
@@ -266,6 +281,8 @@ $(function() {
   addOutfit();
   fetchOutfit();
   setupPieChart();
+  displayFetchOutfit();
+  setupDisplayOutfit();
   // setupBarChart();
   clickHandler();
 });

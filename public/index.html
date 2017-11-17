@@ -20,9 +20,8 @@
       </form>
     </nav>
 
-    <div>
-      <section class="row text-center">
-        <form class="question-form text-left">
+    <div class="question-form text-left hidden">
+      <form>
           <h3>What are you wearing?</h3>
           <div class="headpiece">
             <label>
@@ -66,7 +65,7 @@
 
           <div class="occasion">
             <label>Occasion:</label> <select class="js-occasion-input"> <!--Supplement an id here instead of using 'name'-->
-              <option value="value1">Black Tie</option>
+              <option value="Black Tie">Black Tie</option>
               <option value="value2">Cocktail</option>
               <option value="value3" selected>Everyday</option>
               <option value="value4">Family Get Together</option>
@@ -82,21 +81,17 @@
           </div>
           <br><button type="submit" class="btn btn-info pull-right submit-button">Submit</button>
         </form>
-      </section>
     </div>
 
-    <section>
-      <div class="display hidden">
-        <button type="submit">Display outfit</button>
-      </div>
-    </section>
+    <div class="display hidden">
+      <button type="submit" class="show-display-outfit">Display outfit</button>
+      Test lots of words test test
+    </div>
 
-  <section>
     <div class="display-chart hidden">
       <canvas id="pie-chart" width="800" height="450"</canvas>
       <canvas id="bar-chart" width="800" height="450"</canvas>
     </div>
-  </section>
 </body>
 
 </html>
