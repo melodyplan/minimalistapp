@@ -110,6 +110,7 @@ function displayFetchOutfit() {
   $('.display').html(outfitsElement);*/
 }
 
+//do i still need this (lines 113-120) since it is being over ridden by outfitTemplate?
 function setupDisplayOutfit() {
   $('.show-display-outfit').submit(function(event) {
     console.log('display outfit button clicked');
@@ -117,71 +118,15 @@ function setupDisplayOutfit() {
     fetchOutfit();
   });
 }
-/*    let element = $(outfitTemplate);
-    $('.display').html(element);
-    /*var headpiece = $(e.currentTarget)
-      .find('#js-headpiece')
-      .val()
-      .split(',')
-      .map(function(headpiece) {
-        return headpiece.trim()
-      })
-    var body = $(e.currentTarget)
-      .find('#js-body')
-      .val()
-      .split(',')
-      .map(function(body) {
-        return body.trim()
-      })
-    var bottom = $(e.currentTarget)
-      .find('#js-bottom')
-      .val()
-      .split(',')
-      .map(function(bottom) {
-        return bottom.trim()
-      })
-    var shoes = $(e.currentTarget)
-      .find('#js-shoes')
-      .val()
-      .split(',')
-      .map(function(shoes) {
-        return shoes.trim()
-      })
-    var accessories = $(e.currentTarget)
-      .find('#js-accessories')
-      .val()
-      .split(',')
-      .map(function(accessories) {
-        return accessories.trim()
-      })
-    addOutfit({
-      date: $(e.currentTarget).find('#js-date').val(),
-      headpiece: headpiece,
-      body: body,
-      bottom: bottom,
-      shoes: shoes,
-      accessories: accessories
-    })
-  });
-}*/
 
 function deleteOutfit(outfitId) {
   console.log('Deleting outfit `' + outfitId + '`');
   $.ajax({
     url: OUTFITS_URL + '/' + outfitId,
     method: 'DELETE',
-    success: setupFetchOutfit
+    success: displayFetchOutfit
   });
 }
-
-/*function deleteRecipe(recipeId) {
-  console.log('Deleting recipe `' + recipeId + '`');
-  $.ajax({
-    url: RECIPES_URL + '/' + recipeId,
-    method: 'DELETE',
-    success: getAndDisplayRecipes
-  });
-}*/
 
 function setupPieChart() {
   new Chart(document.getElementById('pie-chart'), {
