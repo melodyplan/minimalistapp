@@ -37,34 +37,44 @@ function fetchOutfit() {
     url: '/outfits',
     dataType: 'json',
     success: function(res) {
-      console.log('display/render outfits');
+      console.log('display/render outfits', res);
     }
   });
 }
 
 //work on lines 51-74 on getting outfits to dislay on landing page
-const outfitTemplate =
-  '<div class="outfit js-outfit">' +
-  '<h3 class="js-outfit-date"><h3>' +
-  '<hr>' +
-  '<ul class="js-outfit-headpiece">' +
-  '</ul>' +
-  '<ul class="js-outfit-body">' +
-  '</ul>' +
-  '<ul class="js-outfit-bottom">' +
-  '</ul>' +
-  '<ul class="js-outfit-shoes">' +
-  '</ul>' +
-  '<ul class="js-outfit-accessories">' +
-  '</ul>' +
-  //should probably add the drop down list here?
-  '<div class="outfit-controls">' +
-  //on click only delete button is working. need to be able to throw in the get request
-  '<button class="js-outfit-delete">' +
-  '<span class="button-label">Delete</span>' +
-  '</button>' +
-  '</div>' +
-  '</div>';
+const outfitTemplate = outfit => {
+  return (
+    '<div class="outfit js-outfit">' +
+    '<h3 class="js-outfit-date">' +
+    outfit.date +
+    '<h3>' +
+    '<hr>' +
+    '<ul class="js-outfit-headpiece">' +
+    outfit.headpiece +
+    '</ul>' +
+    '<ul class="js-outfit-body">' +
+    outfit.body +
+    '</ul>' +
+    '<ul class="js-outfit-bottom">' +
+    outfit.bottom +
+    '</ul>' +
+    '<ul class="js-outfit-shoes">' +
+    outfit.shoes +
+    '</ul>' +
+    '<ul class="js-outfit-accessories">' +
+    outfit.accessories +
+    '</ul>' +
+    //should probably add the drop down list here?
+    '<div class="outfit-controls">' +
+    //on click only delete button is working. need to be able to throw in the get request
+    '<button class="js-outfit-delete">' +
+    '<span class="button-label">Delete</span>' +
+    '</button>' +
+    '</div>' +
+    '</div>'
+  );
+};
 
 var serverBase = '//localhost:8080/';
 var OUTFITS_URL = '/outfits';
@@ -73,14 +83,9 @@ var outfits = [];
 function displayFetchOutfit() {
   console.log('test');
   $.getJSON(OUTFITS_URL, function(outfits) {
-    let outfitsElement = outfits.map(function(outfits) {
-      let element = $(outfitTemplate);
-      element.attr('id', outfits._id);
-      let outfitName = element.find('.js-outfit');
-      outfitName.text(outfits.headpiece);
-      return element;
-    });
-    $('.display').html(outfitsElement);
+    let outfitsHtml = outfits.map(outfitTemplate);
+    // console.log(outfitsElement.map(element => element.html()));
+    $('.display').html(outfitsHtml.join(''));
   });
   /*var outfitsElement = outfits.map(function(outfit) {
     var element = $(outfitTemplate);
