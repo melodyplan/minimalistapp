@@ -25,10 +25,14 @@ function addOutfit() {
       data: JSON.stringify(outfitData),
       success: function(data) {
         console.log('post request worked!');
-        // reference shopping list app getAndDisplayOutfits()
       }
     });
+    reloadPage();
   });
+}
+
+function reloadPage() {
+  document.location.reload();
 }
 
 function fetchOutfit() {
@@ -42,7 +46,8 @@ function fetchOutfit() {
   });
 }
 
-//work on lines 51-74 on getting outfits to dislay on landing page
+/*maybe add a refresh of some kind so newest outfit can be seen when adding
+outfit initially and then checking the display in the same session.*/
 const outfitTemplate = outfit => {
   return (
     '<div class="outfit js-outfit">' +
@@ -71,17 +76,19 @@ const outfitTemplate = outfit => {
     '<button class="js-outfit-delete">' +
     '<span class="button-label">Delete</span>' +
     '</button>' +
+    '<button class="js-outfit-update">' +
+    '<span class="button-label">Update</span>' +
+    '</button>' +
     '</div>' +
     '</div>'
   );
 };
 
 var serverBase = '//localhost:8080/';
-var OUTFITS_URL = '/outfits';
+var OUTFITS_URL = serverBase + 'outfits';
 var outfits = [];
 
 function displayFetchOutfit() {
-  console.log('test');
   $.getJSON(OUTFITS_URL, function(outfits) {
     let outfitsHtml = outfits.map(outfitTemplate);
     // console.log(outfitsElement.map(element => element.html()));
@@ -130,6 +137,21 @@ function deleteOutfit(outfitId) {
     url: OUTFITS_URL + '/' + outfitId,
     method: 'DELETE',
     success: displayFetchOutfit
+  });
+}
+
+//needs button for updating outfit-- this isn't hooked to anything yet
+function updateOutfit(outfit) {
+  console.log('Updating outfit' + outfit.id + '``');
+  $.ajax({
+    url: OUTFITS_URL + '/' + outfit.id,
+    method: 'PUT',
+    data: JSON.stringify(outfit),
+    success: function(data) {
+      displayFetchOutfit();
+    },
+    dataType: 'json',
+    contentType: 'application/json'
   });
 }
 
@@ -200,9 +222,7 @@ function setupPieChart() {
 }*/
 
 function clickHandler() {
-  let form = $('.show-question-form');
-
-  form.submit(function(event) {
+  $('.add-outfit-button').on('click', function(event) {
     event.preventDefault();
 
     $('.question-form').removeClass('hidden').toggle();
@@ -218,12 +238,19 @@ function clickHandler() {
     $('.display-chart').hide();
   });
 
-  $('.display-stats').on('click', function(event) {
+  $('.display-stats-button').on('click', function(event) {
     event.preventDefault();
 
     $('.display-chart').removeClass('hidden').toggle();
     $('.question-form').hide();
     $('.display').hide();
+  });
+}
+
+function handleDeleteOutfit() {
+  $('.js-outfit').on('click', 'js-outfit-delete', function(event) {
+    event.preventDefault();
+    deleteAnOutfit($(event.currentTarget).closest('js-outfit').attr('id'));
   });
 }
 
@@ -235,4 +262,6 @@ $(function() {
   setupDisplayOutfit();
   // setupBarChart();
   clickHandler();
+  deleteOutfit();
+  handleDeleteOutfit();
 });
