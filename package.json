@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "bootstrap": "^3.3.7",
     "chai-http": "^3.0.0",
     "chart.js": "^2.7.1",
     "express": "^4.16.2",

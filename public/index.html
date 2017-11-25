@@ -1,103 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Minimize Wardrobe</title>
-    <meta name="description" content="An app designed to sort, graph and ultimately declutter your wardrobe">
-    <meta name="viewport" content="width=device-width, intial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-    <script type="text/javascript" src="index.js"></script>
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    //below test
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8">
+  <title>Minimize Wardrobe</title>
+  <meta name="description" content="An app designed to sort, graph and ultimately declutter your wardrobe">
+  <meta name="viewport" content="width=device-width, intial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- below test -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+</head>
+<body>
 
-    <nav>
-      <div class="header">
-        <div class="menu">
-          <button type="button" class="add-outfit-button">Add outfit</button>
-          <button type="button" class="display-outfits-button">Display outfits</button>
-          <button type="button" class="display-stats-button">Stats</button>
+  <nav>
+    <div class="header">
+      <div class="menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <a class="pure-menu-heading" href="#">Project 333 Tracker</a>
+          <ul class="menu-list">
+            <button type="button" class="add-outfit-button menu-item">Add outfit</button>
+            <button type="button" class="display-outfits-button menu-item">Display outfits</button>
+            <button type="button" class="display-stats-button menu-item">Stats</button>
+          </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="splash-container">
+    <div class="splash">
+      <h1 class="splash-head">Project 333 Tracker</h1>
+      <p class="splash-subhead">
+        Minimize your closet. Track your progress.
+      </p>
+      <p>
+        <button type="button" class="pure-button pure-button-primary sign-up">Get Started</button>
+      </p>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="content">
+      <h2 class="content-head is-center">Minimize your wardrobe, minimize your stress.</h2>
+      <div class="pure-g">
+        <div class="l-box pure-u-1 pure-u-md-1-3">
+          <div class="dropdown">
+            <h3 class="content-subhead">
+              <i class="fa fa-rocket"></i>
+                <span>What is Project 333?</span>
+            </h3>
+              <div class="dropdown-content">
+                <a href="https://bemorewithless.com/project-333/">Project 333</a> is the minimalist fashion challenge for everyone that invites you to declutter your wardrobe and dress with 33 items or less for 3 months.
+              </div>
+          </div>
+        </div>
+        <div class="l-box pure-u-1 pure-u-md-1-3">
+          <div class="dropdown">
+            <h3 class="content-subhead">
+              <i class="fa fa-mobile"></i>
+              <span>What are the rules?</span>
+            </h3>
+              <div class="dropdown-content">
+                <li>When: Every three months</li>
+                <li>What: 33 items including clothing, accessories, jewelry, outerwear, and shoes.</li>
+                <li>What Not: these items are not counted as part of the 33 items-- wedding ring or other sentimental jewelry that you never take off, underwear, sleep wear, in-home lounge wear, and workout clothing (you can only wear your workout clothing to workout)</li>
+                <li>How: Choose 33 items, box up the rest, seal it with tape and put it out of sight.</li>
+                <li>What else: Consider that you are creating a wardrobe that you can live, work and play in for three months. Remember that this is not a project in suffering. If your clothes don’t fit or are in poor condition, replace them.</li>
+              </div>
+          </div>
+        </div>
+        <div class="l-box pure-u-1 pure-u-md-1-3">
+          <div class="dropdown">
+            <h3 class="content-subhead">
+              <i class="fa fa-check-square-o"></i>
+              <span>So... why do I need your app?</span>
+            </h3>
+            <div class="dropdown-content">
+              Use it to help you figure out which 33 items you want to use by focusing on what you already wear most. Then for the next three months, track the outfits you wear, the combinations you come up with, what's working, and what's not.
+            </div>
+          </div>
         </div>
       </div>
-    </nav>
 
-    <div class="question-form text-left hidden">
-      <form class>
-          <h3>What are you wearing?</h3>
-          <div class="headpiece">
-            <label>
-              Head: <input class="js-headpiece-input" placeholder="" type="text">
-            </label>
-          </div>
-          <div class="body">
-            <label>
-              Body: <input class="js-body-input" type="text">
-            </label>
-          </div>
-          <div class="bottom">
-            <label>
-              Bottom: <input class="js-bottom-input" type="text">
-            </label>
-          </div>
-          <div class="shoes">
-            <label>
-              Shoes: <input class="js-shoes-input" type="text">
-            </label>
-          </div>
-          <!-- add multiple strings for accessories (such as an extra button;
-          see shopping list)-->
-
-          <div class="accessories">
-            <label>
-              Accessories: <input class="js-accessories-input" type="text">
-            </label>
-          </div>
-          <!-- <div class="category">
-            <label>
-              Category: <input value="Emotional" type="radio"> Emotional
-            </label>
-            <label>
-              <input value="Beautiful" type="radio"> Beautiful
-            </label>
-            <label>
-              <input value="Useful" type="radio"> Useful
-            </label>
-          </div> -->
-
-          <div class="occasion">
-            <label>Occasion:</label> <select class="js-occasion-input"> <!--Supplement an id here instead of using 'name'-->
-              <option value="Black Tie">Black Tie</option>
-              <option value="value2">Cocktail</option>
-              <option value="value3" selected>Everyday</option>
-              <option value="value4">Family Get Together</option>
-              <option value="value5">Holiday</option>
-              <option value="value6">Lunch</option>
-              <option value="value7">Night Out</option>
-              <option value="value8">Weekend</option>
-              <option value="value9">Work</option>
-              <option value="value10">Wedding</option>
-              <option value="value11">Vacation</option>
-              <option value="value12">Other</option>
-            </select>
-          </div>
-          <br><button type="submit" class="btn btn-info pull-right submit-button">Submit</button>
-        </form>
     </div>
 
-    <div class="display hidden">
-      <button type="submit" class="show-display-outfit">Display outfit</button>
-      Test lots of words test test
-    </div>
 
-    <div class="display-chart hidden">
-      <canvas id="pie-chart" width="800" height="450"</canvas>
-      <canvas id="bar-chart" width="800" height="450"</canvas>
-    </div>
+
+  <div class="question-form text-left hidden">
+    <form class>
+        <h3>What are you wearing?</h3>
+        <div class="headpiece">
+          <label>
+            Head: <input class="js-headpiece-input" placeholder="" type="text">
+          </label>
+        </div>
+        <div class="body">
+          <label>
+            Body: <input class="js-body-input" type="text">
+          </label>
+        </div>
+        <div class="bottom">
+          <label>
+            Bottom: <input class="js-bottom-input" type="text">
+          </label>
+        </div>
+        <div class="shoes">
+          <label>
+            Shoes: <input class="js-shoes-input" type="text">
+          </label>
+        </div>
+        <!-- add multiple strings for accessories (such as an extra button;
+        see shopping list)-->
+
+        <div class="accessories">
+          <label>
+            Accessories: <input class="js-accessories-input" type="text">
+          </label>
+        </div>
+        <!-- <div class="category">
+          <label>
+            Category: <input value="Emotional" type="radio"> Emotional
+          </label>
+          <label>
+            <input value="Beautiful" type="radio"> Beautiful
+          </label>
+          <label>
+            <input value="Useful" type="radio"> Useful
+          </label>
+        </div> -->
+
+        <div class="occasion">
+          <label>Occasion:</label> <select class="js-occasion-input"> <!--Supplement an id here instead of using 'name'-->
+            <option value="Black Tie">Black Tie</option>
+            <option value="value2">Cocktail</option>
+            <option value="value3" selected>Everyday</option>
+            <option value="value4">Family Get Together</option>
+            <option value="value5">Holiday</option>
+            <option value="value6">Lunch</option>
+            <option value="value7">Night Out</option>
+            <option value="value8">Weekend</option>
+            <option value="value9">Work</option>
+            <option value="value10">Wedding</option>
+            <option value="value11">Vacation</option>
+            <option value="value12">Other</option>
+          </select>
+        </div>
+        <br><button type="submit" class="btn btn-info pull-right submit-button">Submit</button>
+      </form>
+  </div>
+
+  <div class="display hidden">
+    <button type="submit" class="show-display-outfit">Display outfit</button>
+    Test lots of words test test
+  </div>
+
+  <div class="display-chart hidden">
+    <canvas id="pie-chart" width="800" height="450"</canvas>
+    <canvas id="bar-chart" width="800" height="450"</canvas>
+  </div>
+  </div>
 </body>
 
 </html>
