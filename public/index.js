@@ -70,6 +70,9 @@ const outfitTemplate = outfit => {
     '<ul class="js-outfit-accessories">' +
     outfit.accessories +
     '</ul>' +
+    '<ul class="js-outfit-occasion">' +
+    outfit.occasion +
+    '</ul>' +
     //should probably add the drop down list here?
     '<div class="outfit-controls">' +
     //on click only delete button is working. need to be able to throw in the get request
