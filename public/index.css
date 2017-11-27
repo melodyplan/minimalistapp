@@ -2,9 +2,10 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  list-style: none;
 }
 
-body {
+body !important {
   line-height: 1.7em;
   color: #7f8c8d;
   font-size: 13px;
@@ -87,10 +88,11 @@ a.pure-button-primary {
   padding: 0.5em;
   text-align: center;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.10);
-}
-.menu {
   background: #2d3e50;
+  white-space: nowrap;
+  width: 100%;
 }
+
 .pure-menu.pure-menu-fixed {
   /* Fixed menus normally have a border at the bottom. */
   border-bottom: none;
@@ -104,18 +106,23 @@ a.pure-button-primary {
   font-size: 120%;
 }
 
-.menu .pure-menu-selected a {
+.menu .pure-menu-selected .pure-menu-heading a {
   color: white;
 }
 
 .menu a {
   color: #6fbef3;
 }
-.menu .menu-item a:hover,
-.menu .menu-item a:focus {
+
+.menu .menu-list li a:hover,
+.menu li a:focus {
   background: none;
   border: none;
   color: #aecfe5;
+}
+
+.menu-list {
+  display: inline-flex;
 }
 
 /*
@@ -255,11 +262,12 @@ a.pure-button-primary {
 
   /* We can align the menu header to the left, but float the
     menu items to the right. */
-  .home-menu {
+  .menu {
     text-align: left;
   }
-  .home-menu ul {
+  .menu ul {
     float: right;
+    list-style: none;
   }
 
   /* We increase the height of the splash-container */
