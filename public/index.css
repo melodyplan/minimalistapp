@@ -63,10 +63,9 @@ label {
 
 /*
  * -- PURE BUTTON STYLES --
- * I want my pure-button elements to look a little different
  */
-.pure-button {
-  background-color: #1f8dd6;
+.sign-up {
+  background-color: #fadfb8;
   color: white;
   padding: 0.5em 2em;
   border-radius: 5px;
@@ -81,14 +80,13 @@ a.pure-button-primary {
 
 /*
  * -- MENU STYLES --
- * I want to customize how my .pure-menu looks at the top of the page
  */
 
 .menu {
   padding: 0.5em;
   text-align: center;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.10);
-  background: #2d3e50;
+  background: #fadfb8;
   white-space: nowrap;
   width: 100%;
 }
@@ -111,7 +109,7 @@ a.pure-button-primary {
 }
 
 .menu a {
-  color: #6fbef3;
+  color: white;
 }
 
 .menu .menu-list li a:hover,
@@ -127,16 +125,15 @@ a.pure-button-primary {
 
 /*
  * -- SPLASH STYLES --
- * This is the blue top section that appears on the page.
  */
 
 .splash-container {
-  background: #1f8dd6;
+  background: #c9e3e1;
   z-index: 1;
   overflow: hidden;
   /* The following styles are required for the "scroll-over" effect */
   width: 100%;
-  height: 88%;
+  height: 100%;
   top: 0;
   left: 0;
   position: fixed !important;
@@ -200,6 +197,7 @@ a.pure-button-primary {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin: 2em 0 1em;
+  color: #c9e3e1;
 }
 
 /* This is a modifier class used when the content-head is inside a ribbon */
@@ -209,7 +207,7 @@ a.pure-button-primary {
 
 /* This is the class used for the content sub-headers (<h3>) */
 .content-subhead {
-  color: #1f8dd6;
+  color: #adaaa6;
 }
 .content-subhead i {
   margin-right: 7px;
@@ -223,7 +221,8 @@ a.pure-button-primary {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: #c9e3e1;
+  color: white;
   min-width: 350px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -271,9 +270,9 @@ a.pure-button-primary {
   }
 
   /* We increase the height of the splash-container */
-  /*    .splash-container {
-        height: 500px;
-    }*/
+  /*.splash-container {
+    height: 500px;
+  }*/
 
   /* We decrease the width of the .splash, since we have more width
     to work with */
