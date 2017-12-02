@@ -46,45 +46,25 @@ function fetchOutfit() {
   });
 }
 
-/*maybe add a refresh of some kind so newest outfit can be seen when adding
-outfit initially and then checking the display in the same session.*/
 const outfitTemplate = outfit => {
-  return (
-    '<div class="outfit js-outfit">' +
-    '<h3 class="js-outfit-date">' +
-    outfit.date +
-    '<h3>' +
-    '<hr>' +
-    '<ul class="js-outfit-headpiece">' +
-    outfit.headpiece +
-    '</ul>' +
-    '<ul class="js-outfit-body">' +
-    outfit.body +
-    '</ul>' +
-    '<ul class="js-outfit-bottom">' +
-    outfit.bottom +
-    '</ul>' +
-    '<ul class="js-outfit-shoes">' +
-    outfit.shoes +
-    '</ul>' +
-    '<ul class="js-outfit-accessories">' +
-    outfit.accessories +
-    '</ul>' +
-    '<ul class="js-outfit-occasion">' +
-    outfit.occasion +
-    '</ul>' +
-    //should probably add the drop down list here?
-    '<div class="outfit-controls">' +
-    //on click only delete button is working. need to be able to throw in the get request
-    '<button class="js-outfit-delete">' +
-    '<span class="button-label">Delete</span>' +
-    '</button>' +
-    '<button class="js-outfit-update">' +
-    '<span class="button-label">Update</span>' +
-    '</button>' +
-    '</div>' +
-    '</div>'
-  );
+  return `<div class="outfit js-outfit">
+      <h3 class="js-outfit-date">${outfit.date}<h3>
+        <hr>
+          <ul class="js-outfit-headpiece">${outfit.headpiece}</ul>
+          <ul class="js-outfit-body">${outfit.body}</ul>
+          <ul class="js-outfit-bottom">${outfit.bottom}</ul>
+          <ul class="js-outfit-shoes">${outfit.shoes}</ul>
+          <ul class="js-outfit-accessories">${outfit.accessories}</ul>
+          <ul class="js-outfit-occasion">${outfit.occasion}</ul>
+    <div class="outfit-controls">
+      <button class="js-outfit-delete">
+        <span class="button-label">Delete</span>
+      </button>
+      <button class="js-outfit-update">
+        <span class="button-label">Update</span>
+      </button>
+    </div>
+  </div>`;
 };
 
 var serverBase = '//localhost:8080/';
@@ -94,38 +74,10 @@ var outfits = [];
 function displayFetchOutfit() {
   $.getJSON(OUTFITS_URL, function(outfits) {
     let outfitsHtml = outfits.map(outfitTemplate);
-    // console.log(outfitsElement.map(element => element.html()));
     $('.display').html(outfitsHtml.join(''));
   });
-  /*var outfitsElement = outfits.map(function(outfit) {
-    var element = $(outfitTemplate);
-    console.log(element);
-    element.attr('id', `${data.id}`);
-    // element.attr('date', outfit.date);
-    element.find('.js-outfit-date').text(outfit.date);
-    outfit.headpiece.forEach(function(headpiece) {
-      element.find('js-outfit-headpiece').append('<li>' + headpiece + '</li>');
-    });
-    outfit.body.forEach(function(body) {
-      element.find('js-outfit-body').append('<li>' + body + '</li>');
-    });
-    outfit.headpiece.forEach(function(bottom) {
-      element.find('js-outfit-bottom').append('<li>' + bottom + '</li>');
-    });
-    outfit.shoes.forEach(function(shoes) {
-      element.find('js-outfit-shoes').append('<li>' + shoes + '</li>');
-    });
-    outfit.accessories.forEach(function(accessories) {
-      element
-        .find('js-outfit-accessories')
-        .append('<li>' + accessories + '</li>');
-    });
-    return element;
-  });
-  $('.display').html(outfitsElement);*/
 }
 
-//do i still need this (lines 113-120) since it is being over ridden by outfitTemplate?
 function setupDisplayOutfit() {
   $('.show-display-outfit').submit(function(event) {
     console.log('display outfit button clicked');
