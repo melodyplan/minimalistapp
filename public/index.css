@@ -62,10 +62,17 @@ label {
 }
 
 /*
- * -- PURE BUTTON STYLES --
+ * -- BUTTON STYLES --
  */
 .sign-up {
   background-color: #fadfb8;
+  color: white;
+  padding: 0.5em 2em;
+  border-radius: 5px;
+}
+
+.submit-button {
+  background-color: #c9e3e6;
   color: white;
   padding: 0.5em 2em;
   border-radius: 5px;
@@ -305,13 +312,13 @@ a.pure-button-primary {
 
 .question-form {
   position: relative;
-  max-width: 80%;
+  max-width: 100%;
   display: inline-block;
-  width: 400px;
-  border: 1px solid lightslategrey;
+  width: 450px;
   padding: 10px 25px 20px 25px;
   border-radius: 5px;
-  box-shadow: 3px 4px 10px 4px rgba(0, 0, 0, 0.2);
-  margin-top: 15%;
-  margin-left: 15%;
+  box-shadow: 3px 4px 10px 4px #c9e3e6;
+  margin-top: 0%;
+  margin-left: 30%;
+  margin-bottom: 10%;
 }

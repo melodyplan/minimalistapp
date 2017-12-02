@@ -1,3 +1,4 @@
+//create
 function addOutfit() {
   $('.question-form').submit(function(event) {
     event.preventDefault();
@@ -35,6 +36,7 @@ function reloadPage() {
   document.location.reload();
 }
 
+//read
 function fetchOutfit() {
   $.ajax({
     method: 'GET',
@@ -47,8 +49,11 @@ function fetchOutfit() {
 }
 
 const outfitTemplate = outfit => {
+  let utcDate = outfit.date;
+  let dt = new Date(utcDate);
+
   return `<div class="outfit js-outfit">
-      <h3 class="js-outfit-date">${outfit.date}<h3>
+      <h3 class="js-outfit-date">On ${dt.toString()} you wore<h3>
         <hr>
           <ul class="js-outfit-headpiece">${outfit.headpiece}</ul>
           <ul class="js-outfit-body">${outfit.body}</ul>
@@ -57,12 +62,8 @@ const outfitTemplate = outfit => {
           <ul class="js-outfit-accessories">${outfit.accessories}</ul>
           <ul class="js-outfit-occasion">${outfit.occasion}</ul>
     <div class="outfit-controls">
-      <button class="js-outfit-delete">
-        <span class="button-label">Delete</span>
-      </button>
-      <button class="js-outfit-update">
-        <span class="button-label">Update</span>
-      </button>
+      <button class="js-outfit-delete">Delete</button>
+      <button class="js-outfit-update">Update</button>
     </div>
   </div>`;
 };
@@ -75,38 +76,6 @@ function displayFetchOutfit() {
   $.getJSON(OUTFITS_URL, function(outfits) {
     let outfitsHtml = outfits.map(outfitTemplate);
     $('.display').html(outfitsHtml.join(''));
-  });
-}
-
-function setupDisplayOutfit() {
-  $('.show-display-outfit').submit(function(event) {
-    console.log('display outfit button clicked');
-    event.preventDefault();
-    fetchOutfit();
-  });
-}
-
-function deleteOutfit(outfitId) {
-  console.log('Deleting outfit `' + outfitId + '`');
-  $.ajax({
-    url: OUTFITS_URL + '/' + outfitId,
-    method: 'DELETE',
-    success: displayFetchOutfit
-  });
-}
-
-//needs button for updating outfit-- this isn't hooked to anything yet
-function updateOutfit(outfit) {
-  console.log('Updating outfit' + outfit.id + '``');
-  $.ajax({
-    url: OUTFITS_URL + '/' + outfit.id,
-    method: 'PUT',
-    data: JSON.stringify(outfit),
-    success: function(data) {
-      displayFetchOutfit();
-    },
-    dataType: 'json',
-    contentType: 'application/json'
   });
 }
 
@@ -176,6 +145,35 @@ function setupPieChart() {
   });
 }*/
 
+//update
+//needs button for updating outfit-- this isn't hooked to anything yet
+function updateOutfit(outfit) {
+  console.log('Updating outfit' + outfit.id + '``');
+  $.ajax({
+    url: OUTFITS_URL + '/' + outfit.id,
+    method: 'PUT',
+    data: JSON.stringify(outfit),
+    success: function(data) {
+      displayFetchOutfit();
+    },
+    dataType: 'json',
+    contentType: 'application/json'
+  });
+}
+
+//delete
+
+function deleteOutfit(outfitId) {
+  console.log('Deleting outfit `' + outfitId + '`');
+  $.ajax({
+    url: OUTFITS_URL + '/' + outfitId,
+    method: 'DELETE',
+    success: displayFetchOutfit
+  });
+}
+
+//click
+
 function clickHandler() {
   $('.add-outfit-button').on('click', function(event) {
     event.preventDefault();
@@ -202,12 +200,30 @@ function clickHandler() {
   });
 }
 
-function handleDeleteOutfit() {
-  $('.js-outfit').on('click', 'js-outfit-delete', function(event) {
+function setupDisplayOutfit() {
+  $('.show-display-outfit').submit(function(event) {
+    console.log('display outfit button clicked');
     event.preventDefault();
-    deleteAnOutfit($(event.currentTarget).closest('js-outfit').attr('id'));
+    fetchOutfit();
   });
 }
+
+let interval = setInterval(function() {
+  $('.js-outfit-delete').on('click', function(event) {
+    console.log('i got a click!');
+    event.preventDefault();
+    $(event.currentTarget).closest('js-outfit').attr('id');
+  });
+}, 1000);
+
+/*function handleDeleteOutfit() {
+  $('.outfit-controls').on('click', '.js-outfit-delete', function(event) {
+    console.log('i got a click!');
+    event.preventDefault();
+    $(event.currentTarget).closest('js-outfit').attr('id');
+    deleteOutfit();
+  });
+}*/
 
 $(function() {
   addOutfit();
@@ -217,6 +233,6 @@ $(function() {
   setupDisplayOutfit();
   // setupBarChart();
   clickHandler();
+  // handleDeleteOutfit();
   deleteOutfit();
-  handleDeleteOutfit();
 });
