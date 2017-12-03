@@ -65,14 +65,14 @@ label {
  * -- BUTTON STYLES --
  */
 .sign-up {
-  background-color: #fadfb8;
+  background-color: #796476;
   color: white;
   padding: 0.5em 2em;
   border-radius: 5px;
 }
 
 .submit-button {
-  background-color: #c9e3e6;
+  background-color: #796476;
   color: white;
   padding: 0.5em 2em;
   border-radius: 5px;
@@ -93,7 +93,7 @@ a.pure-button-primary {
   padding: 0.5em;
   text-align: center;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.10);
-  background: #fadfb8;
+  background: #796476;
   white-space: nowrap;
   width: 100%;
 }
@@ -135,7 +135,7 @@ a.pure-button-primary {
  */
 
 .splash-container {
-  background: #c9e3e1;
+  background: white;
   z-index: 1;
   overflow: hidden;
   /* The following styles are required for the "scroll-over" effect */
@@ -164,8 +164,8 @@ a.pure-button-primary {
 .splash-head {
   font-size: 20px;
   font-weight: bold;
-  color: white;
-  border: 3px solid white;
+  color: #796476;
+  border: 3px solid #796476;
   padding: 1em 1.6em;
   font-weight: 100;
   border-radius: 5px;
@@ -174,7 +174,7 @@ a.pure-button-primary {
 
 /* This is the subheading that appears on the blue section */
 .splash-subhead {
-  color: white;
+  color: #796476;
   letter-spacing: 0.05em;
   opacity: 0.8;
 }
@@ -204,7 +204,7 @@ a.pure-button-primary {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin: 2em 0 1em;
-  color: #c9e3e1;
+  color: #796476;
 }
 
 /* This is a modifier class used when the content-head is inside a ribbon */
@@ -214,7 +214,7 @@ a.pure-button-primary {
 
 /* This is the class used for the content sub-headers (<h3>) */
 .content-subhead {
-  color: #adaaa6;
+  color: #796476;
 }
 .content-subhead svg {
   margin-right: 7px;
@@ -228,7 +228,7 @@ a.pure-button-primary {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #c9e3e1;
+  background-color: #796476;
   color: white;
   min-width: 350px;
   overflow: auto;
@@ -317,7 +317,7 @@ a.pure-button-primary {
   width: 450px;
   padding: 10px 25px 20px 25px;
   border-radius: 5px;
-  box-shadow: 3px 4px 10px 4px #c9e3e6;
+  box-shadow: 3px 4px 10px 4px #796476;
   margin-top: 0%;
   margin-left: 30%;
   margin-bottom: 10%;
