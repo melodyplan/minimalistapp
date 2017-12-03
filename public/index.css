@@ -3,12 +3,16 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   list-style: none;
+  transform-origin: 0px 0px 0px;
 }
 
 body !important {
-  line-height: 1.7em;
-  color: #7f8c8d;
-  font-size: 13px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.42857143;
+  color: #333;
+  /*line-height: 1.7em;*/
+  /*color: #7f8c8d;*/
 }
 
 h1,
@@ -18,7 +22,47 @@ h4,
 h5,
 h6,
 label {
+  font-family: inherit;
   color: #34495e;
+}
+
+h1 {
+  display: block;
+  /*font-size: 2em;*/
+  -webkit-margin-before: 0.67em;
+  -webkit-margin-after: 0.67em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  /*font-weight: bold;*/
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 24px;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  display: block;
+  /*font-size: 1.17em;*/
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+}
+
+p {
+  display: block;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+}
+
+div {
+  display: block;
 }
 
 .pure-img-responsive {
@@ -76,6 +120,7 @@ label {
   color: white;
   padding: 0.5em 2em;
   border-radius: 5px;
+  float: right;
 }
 
 a.pure-button-primary {
@@ -85,12 +130,17 @@ a.pure-button-primary {
   font-size: 120%;
 }
 
+form {
+  display: block;
+  margin-top: 0em;
+  line-height: 165%;
+}
+
 /*
  * -- MENU STYLES --
  */
 
 .menu {
-  padding: 0.5em;
   text-align: center;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.10);
   background: #796476;
@@ -109,6 +159,7 @@ a.pure-button-primary {
   color: white;
   font-weight: 400;
   font-size: 120%;
+  padding-top: 20px;
 }
 
 .menu .pure-menu-selected .pure-menu-heading a {
@@ -162,7 +213,6 @@ a.pure-button-primary {
 
 /* This is the main heading that appears on the blue section */
 .splash-head {
-  font-size: 20px;
   font-weight: bold;
   color: #796476;
   border: 3px solid #796476;
@@ -220,6 +270,12 @@ a.pure-button-primary {
   margin-right: 7px;
 }
 
+svg {
+  width: 24;
+  height: 24;
+  transform-origin: 50% 50% 0px;
+}
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -235,6 +291,8 @@ a.pure-button-primary {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 12px 16px;
   z-index: 1;
+  box-sizing: border-box;
+  /*display: inline-block;*/
 }
 
 .dropdown:hover .dropdown-content {
@@ -288,10 +346,6 @@ a.pure-button-primary {
     height: 50%;
   }
 
-  .splash-head {
-    font-size: 250%;
-  }
-
   /* We remove the border-separator assigned to .l-box-lrg */
   .l-box-lrg {
     border: none;
@@ -312,13 +366,23 @@ a.pure-button-primary {
 
 .question-form {
   position: relative;
+  text-align: left;
   max-width: 100%;
   display: inline-block;
   width: 450px;
   padding: 10px 25px 20px 25px;
   border-radius: 5px;
+  box-sizing: border-box;
   box-shadow: 3px 4px 10px 4px #796476;
-  margin-top: 0%;
+  margin-top: 15%;
   margin-left: 30%;
   margin-bottom: 10%;
+}
+
+.display-chart {
+  margin-top: 15%;
+}
+
+.display {
+  margin-top: 15%;
 }

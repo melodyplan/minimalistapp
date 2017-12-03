@@ -37,17 +37,6 @@ function reloadPage() {
 }
 
 //read
-//fix .ajax so it's only getJSON (displayFetchOutfit)
-function fetchOutfit() {
-  $.ajax({
-    method: 'GET',
-    url: '/outfits',
-    dataType: 'json',
-    success: function(res) {
-      console.log('display/render outfits', res);
-    }
-  });
-}
 
 const outfitTemplate = outfit => {
   let utcDate = outfit.date;
@@ -69,11 +58,9 @@ const outfitTemplate = outfit => {
   </div>`;
 };
 
-//take the array of objects from outfitTemplate and loop through it using for loop
-
-var serverBase = '//localhost:8080/';
-var OUTFITS_URL = serverBase + 'outfits';
-var outfits = [];
+const serverBase = '//localhost:8080/';
+const OUTFITS_URL = serverBase + 'outfits';
+const outfits = [];
 
 function displayFetchOutfit() {
   $.getJSON(OUTFITS_URL, function(outfits) {
@@ -178,12 +165,22 @@ function deleteOutfit(outfitId) {
 //click
 
 function clickHandler() {
+  $('.reload-home').on('click', function(event) {
+    event.preventDefault();
+
+    $('.splash-container').show();
+    $('.question-form').hide();
+    $('.display').hide();
+    $('.display-chart').hide();
+  });
+
   $('.add-outfit-button').on('click', function(event) {
     event.preventDefault();
 
     $('.question-form').removeClass('hidden').toggle();
     $('.display').hide();
     $('.display-chart').hide();
+    $('.splash-container').hide();
   });
 
   $('.display-outfits-button').on('click', function(event) {
@@ -192,6 +189,7 @@ function clickHandler() {
     $('.display').removeClass('hidden').toggle();
     $('.question-form').hide();
     $('.display-chart').hide();
+    $('.splash-container').hide();
   });
 
   $('.display-stats-button').on('click', function(event) {
@@ -200,16 +198,9 @@ function clickHandler() {
     $('.display-chart').removeClass('hidden').toggle();
     $('.question-form').hide();
     $('.display').hide();
+    $('.splash-container').hide();
   });
 }
-
-// function setupDisplayOutfit() {
-//   $('.show-display-outfit').submit(function(event) {
-//     console.log('display outfit button clicked');
-//     event.preventDefault();
-//     fetchOutfit();
-//   });
-// }
 
 function deleteButtonWork() {
   $('.outfit-controls').on('click', '.js-outfit-delete', function(event) {
@@ -231,10 +222,8 @@ function deleteButtonWork() {
 
 $(function() {
   addOutfit();
-  fetchOutfit();
   setupPieChart();
   displayFetchOutfit();
-  // setupDisplayOutfit();
   // setupBarChart();
   clickHandler();
   // handleDeleteOutfit();

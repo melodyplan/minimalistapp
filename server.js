@@ -31,17 +31,6 @@ app.get('/outfits/:id', (req, res, next) => {
   //i am not sure what logic is also needed here
 });
 
-app.post('/outfits', (req, res) => {
-  /*const requiredFields = ['headpiece', 'body', 'bottom', 'shoes', 'accessories']
-  for (let i = 0; i < requiredFields.length; i++) {
-    const field = requiredFields[i]
-    if (!(field in req.body)) {
-      const message = `Missing \`${field}\` in request body`
-      console.error(message)
-      return res.status(400).send(message)
-    }
-  }*/
-
   Outfit.create({
     headpiece: req.body.headpiece,
     body: req.body.body,
@@ -57,7 +46,32 @@ app.post('/outfits', (req, res) => {
     });
 });
 
-//add put route
+app.put('/outfits/:id', (req, res) => {
+  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    res.status(400).json({
+      error: 'Request path id and request body id values must match'
+    });
+  }
+
+  const updated = {};
+  const updateableFields = [
+    'headpiece',
+    'body',
+    'bottom',
+    'shoes',
+    'accessories',
+    'occasion'
+  ];
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      updated[field] = req.body[field];
+    }
+  });
+
+  Outfit.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
+    .then(updatedPost => res.status(204).end())
+    .catch(err => res.status(500).json({ message: 'Something went wrong' }));
+});
 
 app.delete('outfits/:id', (req, res) => {
   Outfit.findByIdAndRemove(req.params.id).then(() => {
