@@ -37,6 +37,7 @@ function reloadPage() {
 }
 
 //read
+//fix .ajax so it's only getJSON (displayFetchOutfit)
 function fetchOutfit() {
   $.ajax({
     method: 'GET',
@@ -52,7 +53,7 @@ const outfitTemplate = outfit => {
   let utcDate = outfit.date;
   let dt = new Date(utcDate);
 
-  return `<div class="outfit js-outfit">
+  return `<div class="outfit js-outfit" id="${outfit.id}">
       <h3 class="js-outfit-date">On ${dt.toString()} you wore<h3>
         <hr>
           <ul class="js-outfit-headpiece">${outfit.headpiece}</ul>
@@ -67,6 +68,8 @@ const outfitTemplate = outfit => {
     </div>
   </div>`;
 };
+
+//take the array of objects from outfitTemplate and loop through it using for loop
 
 var serverBase = '//localhost:8080/';
 var OUTFITS_URL = serverBase + 'outfits';
@@ -200,21 +203,22 @@ function clickHandler() {
   });
 }
 
-function setupDisplayOutfit() {
-  $('.show-display-outfit').submit(function(event) {
-    console.log('display outfit button clicked');
-    event.preventDefault();
-    fetchOutfit();
-  });
-}
+// function setupDisplayOutfit() {
+//   $('.show-display-outfit').submit(function(event) {
+//     console.log('display outfit button clicked');
+//     event.preventDefault();
+//     fetchOutfit();
+//   });
+// }
 
-let interval = setInterval(function() {
-  $('.js-outfit-delete').on('click', function(event) {
+function deleteButtonWork() {
+  $('.outfit-controls').on('click', '.js-outfit-delete', function(event) {
     console.log('i got a click!');
     event.preventDefault();
-    $(event.currentTarget).closest('js-outfit').attr('id');
+    const outfitId = $(event.target).closest('js-outfit').attr(outfit.id);
+    console.log(outfitId);
   });
-}, 1000);
+}
 
 /*function handleDeleteOutfit() {
   $('.outfit-controls').on('click', '.js-outfit-delete', function(event) {
@@ -230,9 +234,10 @@ $(function() {
   fetchOutfit();
   setupPieChart();
   displayFetchOutfit();
-  setupDisplayOutfit();
+  // setupDisplayOutfit();
   // setupBarChart();
   clickHandler();
   // handleDeleteOutfit();
   deleteOutfit();
+  deleteButtonWork();
 });
