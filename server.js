@@ -26,11 +26,16 @@ app.get('/outfits', (req, res) => {
     });
 });
 
-app.get('/outfits/:id', (req, res, next) => {
-  console.log('Request Id:', req.params.id);
-  //i am not sure what logic is also needed here
+app.get('/outfits/:id', (req, res) => {
+  Outfit.findById(req.params.id)
+    .then(post => res.json(post.apiRepr()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'something did not go so well' });
+    });
 });
 
+app.post('/posts', (req, res) => {
   Outfit.create({
     headpiece: req.body.headpiece,
     body: req.body.body,
@@ -43,6 +48,17 @@ app.get('/outfits/:id', (req, res, next) => {
     .catch(err => {
       console.error(err);
       res.status(500).json({ error: 'Something went wrong' });
+    });
+});
+
+app.delete('outfits/:id', (req, res) => {
+  Outfit.findByIdAndRemove(req.params.id)
+    .then(() => {
+      res.status(204).json({ message: 'success!' });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'something did not do what you intended' });
     });
 });
 
@@ -73,11 +89,15 @@ app.put('/outfits/:id', (req, res) => {
     .catch(err => res.status(500).json({ message: 'Something went wrong' }));
 });
 
-app.delete('outfits/:id', (req, res) => {
-  Outfit.findByIdAndRemove(req.params.id).then(() => {
+app.delete('/:id', (req, res) => {
+  Outfits.findByIdAndRemove(req.params.id).then(() => {
     console.log(`Deleted outfit with id \`${req.params.ID}\``);
     res.status(204).end();
   });
+});
+
+app.use('*', function(req, res) {
+  res.status(404).json({ message: 'Not Found' });
 });
 
 let server;
