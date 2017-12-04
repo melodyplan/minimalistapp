@@ -158,8 +158,7 @@ form {
 .menu .pure-menu-heading {
   color: white;
   font-weight: 400;
-  font-size: 120%;
-  padding-top: 20px;
+  padding-top: 15px !important;
 }
 
 .menu .pure-menu-selected .pure-menu-heading a {
@@ -170,8 +169,7 @@ form {
   color: white;
 }
 
-.menu .menu-list li a:hover,
-.menu li a:focus {
+.menu .menu-list li a:hover {
   background: none;
   border: none;
   color: #aecfe5;
@@ -179,6 +177,12 @@ form {
 
 .menu-list {
   display: inline-flex;
+}
+
+.reload-home:hover {
+  background: none !important;
+  border: none !important;
+  color: #aecfe5;
 }
 
 /*
