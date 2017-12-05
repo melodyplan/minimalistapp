@@ -58,9 +58,8 @@ const outfitTemplate = outfit => {
   </div>`;
 };
 
-const serverBase = '//localhost:8080/';
-const OUTFITS_URL = serverBase + 'outfits';
-const outfits = [];
+const OUTFITS_URL = '/outfits';
+// const outfits = [];
 
 function displayFetchOutfit() {
   $.getJSON(OUTFITS_URL, function(outfits) {
@@ -168,42 +167,42 @@ function clickHandler() {
   $('.reload-home').on('click', function(event) {
     event.preventDefault();
 
-    $('.splash-container').show();
-    $('.question-form').hide();
-    $('.display').hide();
-    $('.display-chart').hide();
+    $('.splash-container').removeClass('hidden');
+    $('.question-form').addClass('hidden');
+    $('.display').addClass('hidden');
+    $('.display-chart').addClass('hidden');
   });
 
   $('.add-outfit-button').on('click', function(event) {
     event.preventDefault();
 
-    $('.question-form').removeClass('hidden').toggle();
-    $('.display').hide();
-    $('.display-chart').hide();
-    $('.splash-container').hide();
+    $('.question-form').removeClass('hidden');
+    $('.display').addClass('hidden');
+    $('.display-chart').addClass('hidden');
+    $('.splash-container').addClass('hidden');
   });
 
   $('.display-outfits-button').on('click', function(event) {
     event.preventDefault();
 
-    $('.display').removeClass('hidden').toggle();
-    $('.question-form').hide();
-    $('.display-chart').hide();
-    $('.splash-container').hide();
+    $('.display').removeClass('hidden');
+    $('.question-form').addClass('hidden');
+    $('.display-chart').addClass('hidden');
+    $('.splash-container').addClass('hidden');
   });
 
   $('.display-stats-button').on('click', function(event) {
     event.preventDefault();
 
-    $('.display-chart').removeClass('hidden').toggle();
-    $('.question-form').hide();
-    $('.display').hide();
-    $('.splash-container').hide();
+    $('.display-chart').removeClass('hidden');
+    $('.question-form').addClass('hidden');
+    $('.display').addClass('hidden');
+    $('.splash-container').addClass('hidden');
   });
 }
 
 function deleteButtonWork() {
-  $('.outfit-controls').on('click', '.js-outfit-delete', function(event) {
+  $('.display').on('click', '.js-outfit-delete', function(event) {
     console.log('i got a click!');
     event.preventDefault();
     const outfitId = $(event.target).closest('js-outfit').attr(outfit.id);

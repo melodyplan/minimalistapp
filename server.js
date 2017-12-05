@@ -35,7 +35,7 @@ app.get('/outfits/:id', (req, res) => {
     });
 });
 
-app.post('/posts', (req, res) => {
+app.post('/outfits', (req, res) => {
   Outfit.create({
     headpiece: req.body.headpiece,
     body: req.body.body,
