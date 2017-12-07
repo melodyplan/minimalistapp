@@ -157,7 +157,9 @@ function deleteOutfit(outfitId) {
   $.ajax({
     url: OUTFITS_URL + '/' + outfitId,
     method: 'DELETE',
-    success: displayFetchOutfit
+    success: displayFetchOutfit,
+    dataType: 'json',
+    contentType: 'application/json'
   });
 }
 
@@ -205,8 +207,9 @@ function deleteButtonWork() {
   $('.display').on('click', '.js-outfit-delete', function(event) {
     console.log('i got a click!');
     event.preventDefault();
-    const outfitId = $(event.target).closest('js-outfit').attr(outfit.id);
+    const outfitId = $(event.target).closest('.js-outfit').attr('id');
     console.log(outfitId);
+    deleteOutfit(outfitId);
   });
 }
 
