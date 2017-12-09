@@ -51,7 +51,8 @@ app.post('/outfits', (req, res) => {
     });
 });
 
-app.delete('outfits/:id', (req, res) => {
+/*app.delete('outfits/:id', (req, res) => {
+  console.log(req.params.id);
   Outfit.findByIdAndRemove(req.params.id)
     .then(() => {
       res.status(204).json({ message: 'success!' });
@@ -60,7 +61,7 @@ app.delete('outfits/:id', (req, res) => {
       console.error(err);
       res.status(500).json({ error: 'something did not do what you intended' });
     });
-});
+});*/
 
 app.put('/outfits/:id', (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
@@ -90,7 +91,7 @@ app.put('/outfits/:id', (req, res) => {
 });
 
 app.delete('/:id', (req, res) => {
-  Outfits.findByIdAndRemove(req.params.id).then(() => {
+  Outfit.findByIdAndRemove(req.params.id).then(() => {
     console.log(`Deleted outfit with id \`${req.params.ID}\``);
     res.status(204).end();
   });

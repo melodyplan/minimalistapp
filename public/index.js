@@ -155,12 +155,12 @@ function updateOutfit(outfit) {
 function deleteOutfit(outfitId) {
   console.log('Deleting outfit `' + outfitId + '`');
   $.ajax({
-    url: OUTFITS_URL + '/' + outfitId,
     method: 'DELETE',
-    success: displayFetchOutfit,
+    url: '/outfits/' + outfitId,
     dataType: 'json',
-    contentType: 'application/json'
+    success: displayFetchOutfit
   });
+  console.log(outfitId);
 }
 
 //click
@@ -229,6 +229,6 @@ $(function() {
   // setupBarChart();
   clickHandler();
   // handleDeleteOutfit();
-  deleteOutfit();
+  // deleteOutfit();
   deleteButtonWork();
 });
