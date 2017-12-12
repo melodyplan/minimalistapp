@@ -32,6 +32,7 @@ app.get('/outfits/:id', (req, res) => {
     .catch(err => {
       console.error(err);
       res.status(500).json({ error: 'something did not go so well' });
+      //want to get a 404 but it's throwing a 500
     });
 });
 
@@ -64,7 +65,8 @@ app.post('/outfits', (req, res) => {
 });*/
 
 app.put('/outfits/:id', (req, res) => {
-  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+  console.log(req.body.id);
+  if (!(req.params.id && req.body.id === req.body.id)) {
     res.status(400).json({
       error: 'Request path id and request body id values must match'
     });
@@ -90,12 +92,18 @@ app.put('/outfits/:id', (req, res) => {
     .catch(err => res.status(500).json({ message: 'Something went wrong' }));
 });
 
-app.delete('/:id', (req, res) => {
+app.delete('/outfits/:id', (req, res) => {
   Outfit.findByIdAndRemove(req.params.id).then(() => {
     console.log(`Deleted outfit with id \`${req.params.ID}\``);
     res.status(204).end();
   });
 });
+
+// app.delete('/outfits/:id', (req, res) => {
+//   Outfit.remove(req.params.id);
+//   console.log(`Deleted shopping list item \`${req.params.id}\``);
+//   res.status(204).end();
+// });
 
 app.use('*', function(req, res) {
   res.status(404).json({ message: 'Not Found' });

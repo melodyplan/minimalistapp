@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const outfitSchema = mongoose.Schema({
   // not sure what this would be-- if it would list photos?
@@ -13,7 +13,7 @@ const outfitSchema = mongoose.Schema({
     type: Date,
     default: Date.now()
   }
-})
+});
 
 outfitSchema.methods.apiRepr = function() {
   return {
@@ -25,9 +25,9 @@ outfitSchema.methods.apiRepr = function() {
     accessories: this.accessories,
     occasion: this.occasion,
     date: this.date
-  }
-}
+  };
+};
 
-const Outfit = mongoose.model('Outfit', outfitSchema)
+const Outfit = mongoose.model('Outfit', outfitSchema, 'outfits');
 
-module.exports = { Outfit }
+module.exports = { Outfit };
