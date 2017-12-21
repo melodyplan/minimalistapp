@@ -135,11 +135,10 @@ function setupPieChart() {
 }*/
 
 //update
-//needs button for updating outfit-- this isn't hooked to anything yet
 function updateOutfit(outfit) {
-  console.log('Updating outfit' + outfit.id + '``');
+  console.log('Updating outfit `' + outfit + '`');
   $.ajax({
-    url: OUTFITS_URL + '/' + outfit.id,
+    url: OUTFITS_URL + '/' + outfit,
     method: 'PUT',
     data: JSON.stringify(outfit),
     success: function(data) {
@@ -149,6 +148,20 @@ function updateOutfit(outfit) {
     contentType: 'application/json'
   });
 }
+
+/*function updateShoppingListitem(item) {
+  console.log('Updating shopping list item `' + item.id + '`');
+  $.ajax({
+    url: SHOPPING_LIST_URL + '/' + item.id,
+    method: 'PUT',
+    data: JSON.stringify(item),
+    success: function(data) {
+      getAndDisplayShoppingList()
+    },
+    dataType: 'json',
+    contentType: 'application/json'
+  });
+}*/
 
 //delete
 
@@ -205,22 +218,26 @@ function clickHandler() {
 
 function deleteButtonWork() {
   $('.display').on('click', '.js-outfit-delete', function(event) {
-    console.log('i got a click!');
+    // console.log('i got a click!');
     event.preventDefault();
-    const outfitId = $(event.target).closest('.js-outfit').attr('id');
-    console.log(outfitId);
+    const outfitId = $(event.target)
+      .closest('.js-outfit')
+      .attr('id');
+    // console.log(outfitId);
     deleteOutfit(outfitId);
   });
 }
 
-/*function handleDeleteOutfit() {
-  $('.outfit-controls').on('click', '.js-outfit-delete', function(event) {
-    console.log('i got a click!');
+function updateButton() {
+  $('.display').on('click', '.js-outfit-update', function(event) {
+    console.log('clicking update');
     event.preventDefault();
-    $(event.currentTarget).closest('js-outfit').attr('id');
-    deleteOutfit();
+    const outfitId = $(event.target)
+      .closest('.js-outfit')
+      .attr('id');
+    updateOutfit(outfitId);
   });
-}*/
+}
 
 $(function() {
   addOutfit();
@@ -228,7 +245,6 @@ $(function() {
   displayFetchOutfit();
   // setupBarChart();
   clickHandler();
-  // handleDeleteOutfit();
-  // deleteOutfit();
   deleteButtonWork();
+  updateButton();
 });

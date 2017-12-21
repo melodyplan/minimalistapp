@@ -52,25 +52,25 @@ app.post('/outfits', (req, res) => {
     });
 });
 
-/*app.delete('outfits/:id', (req, res) => {
-  console.log(req.params.id);
-  Outfit.findByIdAndRemove(req.params.id)
-    .then(() => {
-      res.status(204).json({ message: 'success!' });
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({ error: 'something did not do what you intended' });
-    });
-});*/
-
 app.put('/outfits/:id', (req, res) => {
   console.log(req.body.id);
-  if (!(req.params.id && req.body.id === req.body.id)) {
+  if (req.params.id !== req.body.id) {
     res.status(400).json({
       error: 'Request path id and request body id values must match'
     });
   }
+  /*if (req.params.id !== req.body.id) {
+    const message = `Request path id (${req.params.id}) and request body id (${req.body.id}) must match`;
+    console.error(message);
+    return res.status(400).send(message);
+  }
+  console.log(`Updating shopping list item \`${req.params.id}\``);
+  ShoppingList.update({
+    id: req.params.id,
+    name: req.body.name,
+    budget: req.body.budget
+  });
+  res.status(204).end();*/
 
   const updated = {};
   const updateableFields = [
