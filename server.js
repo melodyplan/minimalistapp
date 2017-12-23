@@ -12,10 +12,10 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 app.get('/outfits', (req, res) => {
-  console.log('outfits');
+  // console.log('outfits');
   Outfit.find()
     .then(outfits => {
-      console.log('outfits found');
+      // console.log('outfits found');
       res.json(outfits.map(outfit => outfit.apiRepr()));
     })
     .catch(err => {
@@ -53,12 +53,15 @@ app.post('/outfits', (req, res) => {
 });
 
 app.put('/outfits/:id', (req, res) => {
-  console.log(req.body.id);
-  if (req.params.id !== req.body.id) {
+  console.log(req.params.id);
+  console.log('tada!');
+  if (req.params.id === null) {
+    console.log('req.params.id is null');
     res.status(400).json({
       error: 'Request path id and request body id values must match'
     });
   }
+
   /*if (req.params.id !== req.body.id) {
     const message = `Request path id (${req.params.id}) and request body id (${req.body.id}) must match`;
     console.error(message);
@@ -73,7 +76,7 @@ app.put('/outfits/:id', (req, res) => {
   res.status(204).end();*/
 
   const updated = {};
-  const updateableFields = [
+  /*const updateableFields = [
     'headpiece',
     'body',
     'bottom',
@@ -85,10 +88,13 @@ app.put('/outfits/:id', (req, res) => {
     if (field in req.body) {
       updated[field] = req.body[field];
     }
-  });
+  });*/
+  //look at lines 78-91 closer
 
   Outfit.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
-    .then(updatedPost => res.status(204).end())
+    .then(updatedOutfit =>
+      res.status(204).json({ status: 'Updated outfit', update: updatedOutfit })
+    )
     .catch(err => res.status(500).json({ message: 'Something went wrong' }));
 });
 

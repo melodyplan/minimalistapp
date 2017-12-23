@@ -135,19 +135,24 @@ function setupPieChart() {
 }*/
 
 //update
-function updateOutfit(outfit) {
-  console.log('Updating outfit `' + outfit + '`');
+function updateOutfit(outfitId) {
+  console.log('Updating outfit `' + outfitId + '`');
   $.ajax({
-    url: OUTFITS_URL + '/' + outfit,
-    method: 'PUT',
-    data: JSON.stringify(outfit),
-    success: function(data) {
-      displayFetchOutfit();
-    },
+    url: '/outfits/' + outfitId,
+    type: 'PUT',
     dataType: 'json',
-    contentType: 'application/json'
-  });
+    data: outfitId
+  })
+    .done(function(done) {
+      console.log('done');
+      displayFetchOutfit();
+    })
+    .fail(function(fail) {
+      console.log(fail);
+    });
 }
+
+//req.body.id does not match req.params.id in server.js
 
 /*function updateShoppingListitem(item) {
   console.log('Updating shopping list item `' + item.id + '`');
