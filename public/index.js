@@ -219,6 +219,17 @@ function clickHandler() {
     $('.display').addClass('hidden');
     $('.splash-container').addClass('hidden');
   });
+
+  /*$('.sign-up').on('click', function(event) {
+    event.preventDefault();
+
+    $('.content-wrapper').animate(
+      {
+        marginTop: '-50vh'
+      },
+      200
+    );
+  });*/
 }
 
 function deleteButtonWork() {
