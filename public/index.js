@@ -68,6 +68,19 @@ function displayFetchOutfit() {
   });
 }
 
+function getOutfit() {
+  console.log('Getting outfit info');
+  $.ajax({
+    method: 'GET',
+    url: '/outfits',
+    contentType: 'application/json',
+    success: function(outfits) {
+      console.log(outfits);
+      outfitTemplate(outfits);
+    }
+  });
+}
+
 function setupPieChart() {
   new Chart(document.getElementById('pie-chart'), {
     type: 'pie',
@@ -135,38 +148,102 @@ function setupPieChart() {
 }*/
 
 //update
-function updateOutfit(outfitId) {
+function updateOutfit(outfitId, outfit) {
   console.log('Updating outfit `' + outfitId + '`');
   $.ajax({
     url: '/outfits/' + outfitId,
     type: 'PUT',
     dataType: 'json',
-    data: outfitId
-  })
-    .done(function(done) {
-      console.log('done');
-      displayFetchOutfit();
-    })
-    .fail(function(fail) {
-      console.log(fail);
+    // data: outfitId
+    contentType: 'text/json',
+    data: JSON.stringify(outfit),
+    success: function(data) {
+      displayFetchOutfit(data);
+    },
+    error: function(err) {
+      console.log(err);
+    }
+  });
+  // .done(function(data) {
+  //   displayFetchOutfit(data);
+  // })
+  // .fail(function(fail) {
+  //   console.log(fail);
+  // });
+}
+
+function updateOutfitForm(id, element) {
+  // let authToken = localStorage.getItem('authToken');
+  $.ajax({
+    method: 'GET',
+    url: '/outfits/' + id,
+    contentType: 'application/json',
+    success: function(outfitId) {
+      console.log(outfitId);
+
+      let updateTemplate = `
+				<form class="row updateOutfitSection" data-id=${outfitId}>
+					<h2>Update this outfit</h2><br>
+					<label for="updateHeadpiece">Head:</label>
+					<input type="text" name="updateHeadpiece" class="updateHeadpiece" value=${
+            outfitId.headpiece
+          }>
+					<label for="updateBody">Body:</label>
+					<input type="text" name="updateBody" class="updateBody" value=${outfitId.body}>
+					<label for="updateBottom">Bottom:</label>
+					<input type="text" name="updateBottom" class="updateBottom" value=${
+            outfitId.bottom
+          }>
+					<label for="updateShoes">Shoes:</label>
+					<input type="text" name="updateShoes" class="updateShoes" value=${
+            outfitId.shoes
+          }>
+          <label for="updateAccessories">Accessories:</label>
+					<input type="text" name="updateAccessories" class="updateAccessories" value=${
+            outfitId.accessories
+          }>
+          <label for="updateOccasion">Occasion:</label>
+					<input type="text" name="updateOccasion" class="updateOccasion" value=${
+            outfitId.occasion
+          }>
+					<button type="submit" id="updateOutfitInfo" class="outfit-controls">Update it!</button>
+				</form>`;
+      // $(element)
+      //   .find('.js-outfit')
+      //   .hide();
+      $(element).after(updateTemplate);
+    }
+  });
+}
+
+function handleOutfitUpdate() {
+  $('#updateOutfitInfo').on('click', function(e) {
+    console.log('you updated your outfit!');
+    e.preventDefault();
+    updateOutfit({
+      headpiece: $(e.currentTarget)
+        .find('.updateHeadpiece')
+        .val(),
+      body: $(e.currentTarget)
+        .find('.updateBody')
+        .val(),
+      bottom: $(e.currentTarget)
+        .find('.updateBottom')
+        .val(),
+      shoes: $(e.currentTarget)
+        .find('.updateShoes')
+        .val(),
+      accessories: $(e.currentTarget)
+        .find('.updateAccessories')
+        .val(),
+      occasion: $(e.currentTarget)
+        .find('.updateOccasion')
+        .val()
     });
+  });
 }
 
 //req.body.id does not match req.params.id in server.js
-
-/*function updateShoppingListitem(item) {
-  console.log('Updating shopping list item `' + item.id + '`');
-  $.ajax({
-    url: SHOPPING_LIST_URL + '/' + item.id,
-    method: 'PUT',
-    data: JSON.stringify(item),
-    success: function(data) {
-      getAndDisplayShoppingList()
-    },
-    dataType: 'json',
-    contentType: 'application/json'
-  });
-}*/
 
 //delete
 
@@ -244,14 +321,50 @@ function deleteButtonWork() {
   });
 }
 
-function updateButton() {
+function displayUpdateForm() {
   $('.display').on('click', '.js-outfit-update', function(event) {
     console.log('clicking update');
     event.preventDefault();
+    let outfit = $(this)
+      .parent()
+      .parent();
     const outfitId = $(event.target)
       .closest('.js-outfit')
       .attr('id');
-    updateOutfit(outfitId);
+    updateOutfitForm(outfitId, outfit);
+  });
+}
+
+function updateButton() {
+  $('body').on('submit', '.updateOutfitSection', function(e) {
+    e.preventDefault();
+    const outfitId = $(event.target)
+      .closest('.js-outfit')
+      .attr('id');
+    console.log(`you submitted updateOutfitSection for ${outfitId}`);
+    let updatedOutfit = {
+      id: outfitId,
+      headpiece: $('.updateHeadpiece').val(),
+      body: $('.updateBody').val(),
+      bottom: $('.updateBottom').val(),
+      shoes: $('.updateShoes').val(),
+      accessories: $('.updateAccessories').val(),
+      occasion: $('.updateOccasion').val()
+    };
+    console.log(updatedOutfit);
+    $.ajax({
+      type: 'PUT',
+      url: OUTFITS_URL + '/' + outfitId,
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: JSON.stringify(updatedOutfit),
+      success: function(data) {
+        console.log('update request worked!');
+      }
+    });
+    //added 354-364
+    // updateOutfit(outfitId, updatedOutfit);
+    console.log('outfit updated');
   });
 }
 
@@ -261,6 +374,8 @@ $(function() {
   displayFetchOutfit();
   // setupBarChart();
   clickHandler();
+  handleOutfitUpdate();
   deleteButtonWork();
+  displayUpdateForm();
   updateButton();
 });
