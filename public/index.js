@@ -68,19 +68,6 @@ function displayFetchOutfit() {
   });
 }
 
-function getOutfit() {
-  console.log('Getting outfit info');
-  $.ajax({
-    method: 'GET',
-    url: '/outfits',
-    contentType: 'application/json',
-    success: function(outfits) {
-      console.log(outfits);
-      outfitTemplate(outfits);
-    }
-  });
-}
-
 function setupPieChart() {
   new Chart(document.getElementById('pie-chart'), {
     type: 'pie',
@@ -152,13 +139,13 @@ function updateOutfit(outfitId, outfit) {
   console.log('Updating outfit `' + outfitId + '`');
   $.ajax({
     url: '/outfits/' + outfitId,
-    type: 'PUT',
+    method: 'PUT',
     dataType: 'json',
     // data: outfitId
-    contentType: 'text/json',
+    contentType: 'application/json',
     data: JSON.stringify(outfit),
     success: function(data) {
-      displayFetchOutfit(data);
+      displayFetchOutfit();
     },
     error: function(err) {
       console.log(err);
@@ -342,7 +329,7 @@ function updateButton() {
       .closest('.js-outfit')
       .attr('id');
     console.log(`you submitted updateOutfitSection for ${outfitId}`);
-    let updatedOutfit = {
+    let newUpdatedOutfit = {
       id: outfitId,
       headpiece: $('.updateHeadpiece').val(),
       body: $('.updateBody').val(),
@@ -351,19 +338,20 @@ function updateButton() {
       accessories: $('.updateAccessories').val(),
       occasion: $('.updateOccasion').val()
     };
-    console.log(updatedOutfit);
-    $.ajax({
-      type: 'PUT',
-      url: OUTFITS_URL + '/' + outfitId,
-      contentType: 'application/json; charset=utf-8',
-      dataType: 'json',
-      data: JSON.stringify(updatedOutfit),
-      success: function(data) {
-        console.log('update request worked!');
-      }
-    });
+    console.log(newUpdatedOutfit);
+    // $.ajax({
+    //   type: 'PUT',
+    //   url: '/outfits/' + outfitId,
+    //   contentType: 'application/json; charset=utf-8',
+    //   dataType: 'json',
+    //   data: JSON.stringify(newUpdatedOutfit),
+    //   success: function(data) {
+    //     console.log('update request worked!');
+    //     displayFetchOutfit(data);
+    //   }
+    // });
     //added 354-364
-    // updateOutfit(outfitId, updatedOutfit);
+    updateOutfit(outfitId, newUpdatedOutfit);
     console.log('outfit updated');
   });
 }

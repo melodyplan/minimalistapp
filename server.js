@@ -53,7 +53,7 @@ app.post('/outfits', (req, res) => {
 });
 
 app.put('/outfits/:id', (req, res) => {
-  console.log(req.params.id);
+  console.log(req.body);
   console.log('tada!');
   if (req.params.id === null) {
     console.log('req.params.id is null');
@@ -91,7 +91,7 @@ app.put('/outfits/:id', (req, res) => {
   });*/
   //look at lines 78-91 closer
 
-  Outfit.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
+  Outfit.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
     .then(updatedOutfit =>
       res.status(204).json({ status: 'Updated outfit', update: updatedOutfit })
     )
