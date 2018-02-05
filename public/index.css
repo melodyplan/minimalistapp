@@ -21,7 +21,8 @@ h3,
 h4,
 h5,
 h6,
-label {
+label,
+ul {
   font-family: inherit;
   /*color: #34495e;*/
   color: #22a08d;
@@ -139,6 +140,10 @@ div {
   border-radius: 5px;
 }
 
+.occasion-section {
+  margin-left: 250px;
+}
+
 a.pure-button-primary {
   background: white;
   color: #1f8dd6;
@@ -207,7 +212,7 @@ form {
 
 .splash-container {
   background: white;
-  background-image: url('http://www.un-fancy.com/wp-content/uploads/2016/02/slider1.jpg');
+  background-image: url('../images/closet1.jpg');
   background-size: cover;
   background-size: 100% 100%;
   z-index: 1;
@@ -218,6 +223,7 @@ form {
   top: 0;
   left: 0;
   position: fixed !important;
+  /*http://www.un-fancy.com/wp-content/uploads/2016/02/slider1.jpg*/
 }
 
 .splash {
@@ -226,7 +232,7 @@ form {
   height: 50%;
   margin: auto;
   position: absolute;
-  top: 75px;
+  top: 100px;
   left: 0;
   /*bottom: 0;*/
   right: 0;
@@ -320,7 +326,7 @@ svg {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: darkslategray;
+  background-color: #22a08d;
   color: white;
   min-width: 350px;
   overflow: auto;
@@ -424,7 +430,7 @@ svg {
 .outfit {
   border: 2px #22a08d solid;
   margin-bottom: 100px;
-  width: 50%;
+  width: 35%;
   margin: auto;
   margin-top: 50px;
   padding: 10px;
@@ -436,9 +442,9 @@ svg {
 }
 
 .display-chart {
-  margin-top: 15%;
+  margin-top: 5%;
 }
 
 .display {
-  margin-top: 15%;
+  margin-top: 7%;
 }

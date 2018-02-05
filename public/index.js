@@ -40,17 +40,69 @@ function reloadPage() {
 
 const outfitTemplate = outfit => {
   let utcDate = outfit.date;
-  let dt = new Date(utcDate);
+  // let dt = new Date(utcDate);
+  // ${dt.toString()}
 
-  return `<div class="outfit js-outfit" id="${outfit.id}">
-      <h3 class="js-outfit-date">On ${dt.toString()} you wore<h3>
+  let dt = new Date(utcDate),
+    hours = dt.getHours(),
+    minutes = dt.getMinutes();
+  if (minutes < 10) {
+    minutes = '0' + minutes;
+  }
+  let suffix = 'AM';
+  if (hours >= 12) {
+    suffix = 'PM';
+    hours = hours - 12;
+  }
+  if (hours === 0) {
+    hours = 12;
+  }
+  let finalTime = `${hours}:${minutes} ${suffix}`;
+  let dayArray = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
+  ];
+  let monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
+  let monthName = monthNames[dt.getMonth()];
+  let dayName = dayArray[dt.getDay()];
+  let numberDay = dt.getDate();
+  let year = dt.getFullYear();
+
+  return `<div class="outfit" id="${outfit.id}">
+      <h4 class="js-outfit-date">On ${dayName} ${monthName} ${numberDay}, ${year} at ${hours}:${minutes} ${suffix} you wore a...</h4>
         <hr>
-          <ul class="js-outfit-headpiece">${outfit.headpiece}</ul>
-          <ul class="js-outfit-body">${outfit.body}</ul>
-          <ul class="js-outfit-bottom">${outfit.bottom}</ul>
-          <ul class="js-outfit-shoes">${outfit.shoes}</ul>
-          <ul class="js-outfit-accessories">${outfit.accessories}</ul>
-          <ul class="js-outfit-occasion">${outfit.occasion}</ul>
+      <div class="js-outfit">
+        <div class="outfit-section">
+            <ul class="js-outfit-headpiece">${outfit.headpiece}</ul>
+            <ul class="js-outfit-body">${outfit.body}</ul>
+            <ul class="js-outfit-bottom">${outfit.bottom}</ul>
+            <ul class="js-outfit-shoes">${outfit.shoes}</ul>
+            <ul class="js-outfit-accessories">${outfit.accessories}</ul>
+        </div>
+        <div class="occasion-section">
+            <ul class="js-outfit-occasion">...for ${
+              outfit.occasion
+            } attire. </ul>
+        </div>
+      </div>
     <div class="outfit-controls">
       <button class="js-outfit-delete">Delete</button>
       <button class="js-outfit-update">Update</button>
@@ -67,72 +119,6 @@ function displayFetchOutfit() {
     $('.display').html(outfitsHtml.join(''));
   });
 }
-
-function setupPieChart() {
-  new Chart(document.getElementById('pie-chart'), {
-    type: 'pie',
-    data: {
-      labels: ['Headpiece', 'Body', 'Bottom', 'Shoes', 'Accessories'],
-      datasets: [
-        {
-          label: 'How often worn (percent)',
-          backgroundColor: [
-            '#3e95cd',
-            '#8e5ea2',
-            '#3cba9f',
-            '#e8c3b9',
-            '#c45850'
-          ],
-          data: [8, 30, 30, 30, 15]
-        }
-      ]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'How often outfit articles were worn this month'
-      }
-    }
-  });
-}
-
-/*function setupBarChart() {
-  new Chart(document.getElementById('bar-chart'), {
-    type: 'bar',
-    data: {
-      labels: [
-        'Black Tie',
-        'Cocktail',
-        'Everyday',
-        'Family Get Together',
-        'Holiday',
-        'Night Out',
-        'Weekend',
-        'Work',
-        'Wedding'
-      ],
-      datasets: [
-        {
-          label: 'Outfits by occasion',
-          backgroundColor: [
-            '#3e95cd',
-            '#8e5ea2',
-            '#3cba9f',
-            '#e8c3b9',
-            '#c45850'
-          ],
-          data: [4, 0, 135, 2, 30, 9, 15, 1]
-        }
-      ]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Outfits worn by occasion this year'
-      }
-    }
-  });
-}*/
 
 //update
 function updateOutfit(outfitId, outfit) {
@@ -151,12 +137,6 @@ function updateOutfit(outfitId, outfit) {
       console.log(err);
     }
   });
-  // .done(function(data) {
-  //   displayFetchOutfit(data);
-  // })
-  // .fail(function(fail) {
-  //   console.log(fail);
-  // });
 }
 
 function updateOutfitForm(id, element) {
@@ -195,9 +175,6 @@ function updateOutfitForm(id, element) {
           }>
 					<button type="submit" id="updateOutfitInfo" class="outfit-controls">Update it!</button>
 				</form>`;
-      // $(element)
-      //   .find('.js-outfit')
-      //   .hide();
       $(element).after(updateTemplate);
     }
   });
@@ -230,7 +207,41 @@ function handleOutfitUpdate() {
   });
 }
 
-//req.body.id does not match req.params.id in server.js
+function displayUpdateForm() {
+  $('.display').on('click', '.js-outfit-update', function(event) {
+    console.log('clicking update');
+    event.preventDefault();
+    let outfit = $(this)
+      .parent()
+      .parent();
+    const outfitId = $(event.target)
+      .closest('.js-outfit')
+      .attr('id');
+    updateOutfitForm(outfitId, outfit);
+  });
+}
+
+function updateButton() {
+  $('body').on('submit', '.updateOutfitSection', function(e) {
+    e.preventDefault();
+    const outfitId = $(event.target)
+      .closest('.js-outfit')
+      .attr('id');
+    console.log(`you submitted updateOutfitSection for ${outfitId}`);
+    let newUpdatedOutfit = {
+      id: outfitId,
+      headpiece: $('.updateHeadpiece').val(),
+      body: $('.updateBody').val(),
+      bottom: $('.updateBottom').val(),
+      shoes: $('.updateShoes').val(),
+      accessories: $('.updateAccessories').val(),
+      occasion: $('.updateOccasion').val()
+    };
+    console.log(newUpdatedOutfit);
+    updateOutfit(outfitId, newUpdatedOutfit);
+    console.log('outfit updated');
+  });
+}
 
 //delete
 
@@ -243,6 +254,18 @@ function deleteOutfit(outfitId) {
     success: displayFetchOutfit
   });
   console.log(outfitId);
+}
+
+function deleteButtonWork() {
+  $('.display').on('click', '.js-outfit-delete', function(event) {
+    // console.log('i got a click!');
+    event.preventDefault();
+    const outfitId = $(event.target)
+      .closest('.js-outfit')
+      .attr('id');
+    // console.log(outfitId);
+    deleteOutfit(outfitId);
+  });
 }
 
 //click
@@ -296,65 +319,83 @@ function clickHandler() {
   });*/
 }
 
-function deleteButtonWork() {
-  $('.display').on('click', '.js-outfit-delete', function(event) {
-    // console.log('i got a click!');
-    event.preventDefault();
-    const outfitId = $(event.target)
-      .closest('.js-outfit')
-      .attr('id');
-    // console.log(outfitId);
-    deleteOutfit(outfitId);
+//Chart
+
+/*function fetchOutfitData() {
+  $.getJSON(OUTFITS_URL, function(outfits) {
+    let outfitsHtml = outfits.map(outfitTemplate);
+    $('.display').html(outfitsHtml.join(''));
+  });
+}*/
+//possible lines 316-321 to get array of garment types
+
+function setupPieChart() {
+  new Chart(document.getElementById('pie-chart').getContext('2d'), {
+    type: 'pie',
+    data: {
+      labels: ['Headpiece', 'Body', 'Bottom', 'Shoes', 'Accessories'],
+      datasets: [
+        {
+          label: 'How often worn (percent)',
+          backgroundColor: [
+            '#2ecc71',
+            '#3498db',
+            // "#95a5a6",
+            '#9b59b6',
+            '#f1c40f',
+            '#e74c3c'
+            // "#34495e"
+          ],
+          data: [18, 30, 30, 30, 15]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'How often outfit articles were worn this month'
+      }
+    }
   });
 }
 
-function displayUpdateForm() {
-  $('.display').on('click', '.js-outfit-update', function(event) {
-    console.log('clicking update');
-    event.preventDefault();
-    let outfit = $(this)
-      .parent()
-      .parent();
-    const outfitId = $(event.target)
-      .closest('.js-outfit')
-      .attr('id');
-    updateOutfitForm(outfitId, outfit);
+/*function setupBarChart() {
+  new Chart(document.getElementById('bar-chart'), {
+    type: 'bar',
+    data: {
+      labels: [
+        'Black Tie',
+        'Cocktail',
+        'Everyday',
+        'Family Get Together',
+        'Holiday',
+        'Night Out',
+        'Weekend',
+        'Work',
+        'Wedding'
+      ],
+      datasets: [
+        {
+          label: 'Outfits by occasion',
+          backgroundColor: [
+            '#3e95cd',
+            '#8e5ea2',
+            '#3cba9f',
+            '#e8c3b9',
+            '#c45850'
+          ],
+          data: [4, 0, 135, 2, 30, 9, 15, 1]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Outfits worn by occasion this year'
+      }
+    }
   });
-}
-
-function updateButton() {
-  $('body').on('submit', '.updateOutfitSection', function(e) {
-    e.preventDefault();
-    const outfitId = $(event.target)
-      .closest('.js-outfit')
-      .attr('id');
-    console.log(`you submitted updateOutfitSection for ${outfitId}`);
-    let newUpdatedOutfit = {
-      id: outfitId,
-      headpiece: $('.updateHeadpiece').val(),
-      body: $('.updateBody').val(),
-      bottom: $('.updateBottom').val(),
-      shoes: $('.updateShoes').val(),
-      accessories: $('.updateAccessories').val(),
-      occasion: $('.updateOccasion').val()
-    };
-    console.log(newUpdatedOutfit);
-    // $.ajax({
-    //   type: 'PUT',
-    //   url: '/outfits/' + outfitId,
-    //   contentType: 'application/json; charset=utf-8',
-    //   dataType: 'json',
-    //   data: JSON.stringify(newUpdatedOutfit),
-    //   success: function(data) {
-    //     console.log('update request worked!');
-    //     displayFetchOutfit(data);
-    //   }
-    // });
-    //added 354-364
-    updateOutfit(outfitId, newUpdatedOutfit);
-    console.log('outfit updated');
-  });
-}
+}*/
 
 $(function() {
   addOutfit();
