@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Minimize Wardrobe</title>
+  <meta name="description" content="An app designed to sort, graph and ultimately declutter your wardrobe">
+  <meta name="viewport" content="width=device-width, intial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+</head>
+<body>
+
+  <nav>
+    <div class="header">
+      <div class="menu home-menu pure-menu pure-menu-fixed pure-menu-horizontal">
+        <div class="pure-menu-heading"><li><a class="reload-home pure-menu-link">Project 333 Tracker</a></li></div>
+          <ul class="menu-list">
+            <li class="menu-item"><a class="add-outfit-button pure-menu-link">Add</a></li>
+            <li class="menu-item"><a class="display-outfits-button pure-menu-link">Outfits</a></li>
+            <li class="menu-item"><a class="display-stats-button pure-menu-link">Stats</a></li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="splash-container">
+    <div class="splash">
+      <h1 class="splash-head">Project 333 Tracker</h1>
+      <p class="splash-subhead">
+        Minimize your closet. Track your progress.
+      </p>
+      <p>
+        <!-- <button type="button" class="sign-up">Get Started</button> -->
+      </p>
+    </div>
+  </div>
+
+  <div class="question-form text-left hidden">
+    <form class>
+        <h3>What are you wearing on your...?</h3>
+        <div class="headpiece">
+          <label>
+            Head: <input class="js-headpiece-input" placeholder="" type="text">
+          </label>
+        </div>
+        <div class="body">
+          <label>
+            Body: <input class="js-body-input" type="text">
+          </label>
+        </div>
+        <div class="bottom">
+          <label>
+            Bottom: <input class="js-bottom-input" type="text">
+          </label>
+        </div>
+        <div class="shoes">
+          <label>
+            Feet: <input class="js-shoes-input" type="text">
+          </label>
+        </div>
+
+        <div class="accessories">
+          <label>
+            Any accessories: <input class="js-accessories-input" type="text">
+          </label>
+        </div>
+        <!-- <div class="category">
+          <label>
+            Category: <input value="Emotional" type="radio"> Emotional
+          </label>
+          <label>
+            <input value="Beautiful" type="radio"> Beautiful
+          </label>
+          <label>
+            <input value="Useful" type="radio"> Useful
+          </label>
+        </div> -->
+
+        <div class="occasion">
+          <label>What occasion:</label> <select class="js-occasion-input">
+            <option value="Black Tie">Black Tie</option>
+            <option value="Cocktail">Cocktail</option>
+            <option value="Everyday" selected>Everyday</option>
+            <option value="Family Get Together">Family Get Together</option>
+            <option value="Holiday">Holiday</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Night Out">Night Out</option>
+            <option value="Weekend">Weekend</option>
+            <option value="Work">Work</option>
+            <option value="Wedding">Wedding</option>
+            <option value="Vacation">Vacation</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <br><button type="submit" class="pull-right submit-button">Submit</button>
+      </form>
+  </div>
+
+  <div class="display hidden"></div>
+
+  <div class="display-chart hidden">
+    <canvas id="pie-chart" width="600" height="250"</canvas>
+    <canvas id="bar-chart" width="800" height="450"</canvas>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="content">
+      <h2 class="content-head is-center"><div class="arrow-up">⇧</div>Minimize your wardrobe, minimize your stress.</h2>
+      <div class="pure-g">
+        <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+          <div class="dropdown">
+            <h3 class="content-subhead">
+              <svg version="1.1" class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
+              <title>compass</title>
+              <path style="fill:#22a08d" d="M17 32c-0.072 0-0.144-0.008-0.217-0.024-0.458-0.102-0.783-0.507-0.783-0.976v-15h-15c-0.469 0-0.875-0.326-0.976-0.783s0.129-0.925 0.553-1.123l30-14c0.381-0.178 0.833-0.098 1.13 0.199s0.377 0.749 0.199 1.13l-14 30c-0.167 0.358-0.524 0.577-0.906 0.577zM5.508 14h11.492c0.552 0 1 0.448 1 1v11.492l10.931-23.423-23.423 10.931z"></path>
+              </svg>
+                <span>What is Project 333?</span>
+            </h3>
+              <div class="dropdown-content">
+                <a href="https://bemorewithless.com/project-333/">Project 333</a> is the minimalist fashion challenge to declutter your wardrobe and dress with 33 items or less for 3 months.
+              </div>
+          </div>
+        </div>
+        <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+          <div class="dropdown">
+            <h3 class="content-subhead">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
+              <title>accessibility</title>
+              <path style="fill:#22a08d" d="M13 3c0-1.657 1.343-3 3-3s3 1.343 3 3c0 1.657-1.343 3-3 3s-3-1.343-3-3z"></path>
+              <path style="fill:#22a08d" d="M20 10l10.3-4.443-0.743-1.857-12.557 4.3h-2l-12.557-4.3-0.743 1.857 10.3 4.443v8l-4.102 13.268 1.87 0.709 5.804-12.977h0.857l5.804 12.977 1.87-0.709-4.102-13.268z"></path>
+              </svg>
+                <span>How does this help me?</span>
+              </h3>
+              <div class="dropdown-content">
+                Clutter is stressful. A large part of our clutter is clothes. Less clothing = less stress. Give it a try.
+              </div>
+            </div>
+        </div>
+        <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+          <div class="dropdown">
+            <h3 class="content-subhead">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
+              <title>list-numbered</title>
+              <path style="fill:#22a08d" d="M12 26h20v4h-20zM12 14h20v4h-20zM12 2h20v4h-20zM6 0v8h-2v-6h-2v-2zM4 16.438v1.563h4v2h-6v-4.563l4-1.875v-1.563h-4v-2h6v4.563zM8 22v10h-6v-2h4v-2h-4v-2h4v-2h-4v-2z"></path>
+              </svg>
+              <span>What are the rules?</span>
+            </h3>
+              <div class="dropdown-content">
+                <li><i>When</i>: Every 3 months</li>
+                <br>
+                <li><i>What</i>: 33 items including clothing, accessories, jewelry, outerwear, and shoes.</li>
+                <br>
+                <li><i>What Not</i>: items not counted as part of the 33 items-- wedding ring or other sentimental jewelry that you never take off, underwear, sleep wear, in-home lounge wear, and workout clothing (only wear workout clothing to workout)</li>
+                <br>
+                <li><i>How</i>: Choose 33 items, box up the rest, seal it with tape and put it out of sight.</li>
+                <br>
+                <li><i>What else</i>: Consider that you are creating a wardrobe that you can live, work and play in for three months. Remember that this is not a project in suffering. If your clothes don’t fit or are in poor condition, replace them.</li>
+              </div>
+          </div>
+        </div>
+        <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+          <div class="dropdown">
+            <h3 class="content-subhead">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
+              <title>happy</title>
+              <path style="fill:#22a08d" d="M16 32c8.837 0 16-7.163 16-16s-7.163-16-16-16-16 7.163-16 16 7.163 16 16 16zM16 3c7.18 0 13 5.82 13 13s-5.82 13-13 13-13-5.82-13-13 5.82-13 13-13zM16 18.711c3.623 0 7.070-0.963 10-2.654-0.455 5.576-4.785 9.942-10 9.942s-9.544-4.371-10-9.947c2.93 1.691 6.377 2.658 10 2.658zM8 11c0-1.657 0.895-3 2-3s2 1.343 2 3c0 1.657-0.895 3-2 3s-2-1.343-2-3zM20 11c0-1.657 0.895-3 2-3s2 1.343 2 3c0 1.657-0.895 3-2 3s-2-1.343-2-3z"></path>
+              </svg>
+              <span>Why do I need your app?</span>
+            </h3>
+            <div class="dropdown-content">
+              Use it to help you figure out which 33 items you want to use by focusing on what you already wear most. Then for the next three months, track the outfits you wear, the combinations you come up with, what's working, and what's not.
+            </div>
+            <!-- maybe add a div here for "why would i wanna do this" -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>
