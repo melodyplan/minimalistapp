@@ -245,11 +245,11 @@ function updateButton() {
 
 //delete
 
-function deleteOutfit(outfitId) {
-  console.log('Deleting outfit `' + outfitId + '`');
+function deleteOutfit(outfit) {
+  console.log('Deleting outfit `' + outfit.id + '`');
   $.ajax({
+    url: OUTFITS_URL + '/' + outfit.id,
     method: 'DELETE',
-    url: '/outfits/' + outfitId,
     dataType: 'json',
     success: displayFetchOutfit
   });
